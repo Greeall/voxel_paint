@@ -11,9 +11,4 @@ public class IconSize : MonoBehaviour {
 		float widthHeight = Screen.width / coeff;
 		GetComponent<RectTransform>().sizeDelta = new Vector2(widthHeight, widthHeight);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
