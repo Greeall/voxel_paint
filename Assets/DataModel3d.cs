@@ -14,10 +14,8 @@ public class DataModel3d : Model3d {
 
 	
 void Start () {
-		
 		layer = 0;
 		DisplayLayer(layer);
-	
 	}
 	
 	// Update is called once per frame
