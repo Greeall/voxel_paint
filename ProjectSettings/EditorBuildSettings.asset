@@ -11,6 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/VoxelPaint.unity
     guid: b751d287546c5b94f989034539cc6286
-  - enabled: 1
+  - enabled: 0
     path: Assets/AdminPanel.unity
     guid: 211364613718eb4429e710355b6cbdaa

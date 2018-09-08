@@ -6,6 +6,8 @@ public class Layer {
 
 	public List<VoxelPlatform> layer;
 
+	public bool isDrawing = false;
+
 	// Use this for initialization
 	void Start () {
 		

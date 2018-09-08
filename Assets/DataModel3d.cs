@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataModel3d : Model3d {
+/*public class DataModel3d : Model3d {
 
 	public GameObject platformPrefab;
 
@@ -59,3 +59,4 @@ void Start () {
 	}
 
 }
+*/

@@ -2,48 +2,127 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 using System.IO;
 
 public class ItemController : MonoBehaviour {
 
+	[HideInInspector] public int selectedItem = 0;
+	[HideInInspector] public List<Datas> allModels;
+	[HideInInspector] public List<int> homeModels;
 
 
-	public int selectedItem = 0;
-	public List<Datas> models;
 
-	
-	
+	public Text testo;
+
+	public int modelsCount;
 
 	public static ItemController I;
-
-	// Use this for initialization
-	
 	
 	void Awake()
 	{
 		I = this;
-		ItemController.I.models = new List<Datas>();
-		ReadLevelsFromStore();
+		ItemController.I.homeModels = new List<int>();
+		ItemController.I.allModels = new List<Datas>();
+		//if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
+		//{
+			ReadLevelsFromStore();
+		//	Debug.Log("read from store");
+		//}
+		//else
+		//{
+		//	ReadLevelsFromPref();
+		//	Debug.Log("read from pref");
+		//}
+
+		//ReadHomeLevelsFromStore();
 	}
 
-	void Start () {
-		
+	void Update()
+	{
+		SaveAllModelsToPref();
+		if(Input.GetKeyDown("b"))
+		{
+			LookDrawnVoxel();
+		}
 	}
+
+	void LookDrawnVoxel()
+	{
+		foreach(Layer l in allModels[0]._model)
+		{
+			foreach(VoxelPlatform p in l.layer)
+			{
+				Debug.Log(p.isDrawing);
+			}
+		}
+	}
+
 	
-	// Update is called once per frame
-	void Update () {
-		
-		
+	void Start()
+	{
+		SaveHomeItemsToPref();
 	}
+
+	void ReadLevelsFromPref()
+	{
+		for(int i = 0; i < modelsCount; i++)
+		{
+			string m = PlayerPrefs.GetString("model"+i, "");
+			allModels.Add(JsonUtility.FromJson<Datas>(m));
+		}
+	}
+
+	
 
 	public void ReadLevelsFromStore()
 	{
-		int count = PlayerPrefs.GetInt("levelsCount", 0);
+		for(int i = 0; i < modelsCount; i++)
+		{
+			TextAsset level = Resources.Load<TextAsset>("model" + i);
+			string levelTxtString = level.text;
+			allModels.Add(JsonUtility.FromJson<Datas>(levelTxtString));
+		}
+		PlayerPrefs.SetInt("firstLaunch", 1);
+		SaveAllModelsToPref();
+	}
+
+	void SaveAllModelsToPref()
+	{
+		for(int i = 0; i < modelsCount; i++)
+		{
+			string m = JsonUtility.ToJson(allModels[i]);
+			PlayerPrefs.SetString("model"+i, m);
+		}
+	}
+
+	public void ReadHomeLevelsFromStore()
+	{
+		int count = PlayerPrefs.GetInt("homeLevelsCount", 0);
 		for(int i = 0; i < count; i ++)
 		{
-			string levelTxtString = PlayerPrefs.GetString("level" + i, "");
-			ItemController.I.models.Add(JsonUtility.FromJson<Datas>(levelTxtString));
+			homeModels.Add(PlayerPrefs.GetInt("homeLevel" + i, 0));
+		}
+	}
+
+
+	public void AddLevelToHomeMenu()
+	{
+		if(!homeModels.Contains(selectedItem))
+		{
+			homeModels.Add(selectedItem);
+		}
+		SaveHomeItemsToPref();
+	}
+
+	void SaveHomeItemsToPref()
+	{
+		int i = 0;
+		PlayerPrefs.SetInt("homeLevelsCount", homeModels.Count);
+		foreach(int item in homeModels)
+		{
+			PlayerPrefs.SetInt("homeLevel" + i, item);
+			i++;
 		}
 	}
 

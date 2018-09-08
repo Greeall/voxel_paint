@@ -7,6 +7,8 @@ public class VoxelPlatform {
 	public Vector2 position;
 	public int voxelColor;
 
+	public bool isDrawing = false;
+
 	public Color FindColor(List<VoxelColor> colors) {
 		return colors[voxelColor].color;
 	}

@@ -49,6 +49,7 @@ public class MakingVoxel : MonoBehaviour {
 
 	public IEnumerator SmoothCreateVoxel()
 	{
+		
 		float time = 0.3f;
 		int steps = 20;
 		float y = 0;

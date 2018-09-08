@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using UnityEditor;
+//using UnityEditor;
 
 public class AdminPanel : MonoBehaviour {
 
@@ -33,14 +33,14 @@ public class AdminPanel : MonoBehaviour {
 		SaveLevelsToPrefs();
 		if(Input.GetKeyDown("a"))
 		{
-			Debug.Log(ItemController.I.models.Count);
+			Debug.Log(ItemController.I.allModels.Count);
 		}
 		
 	}
 
 	
 
-	public void AddImgLevel()
+	/*public void AddImgLevel()
 	{
 		img = null;
 		string path = EditorUtility.OpenFilePanel("Overwrite with txt", "", "png");
@@ -77,8 +77,8 @@ public class AdminPanel : MonoBehaviour {
 	{
 		if(levelTxt.isExist()  && img == true)
 		{
-			ItemController.I.models.Add(levelTxt);
-			int count = ItemController.I.models.Count;
+			ItemController.I.allModels.Add(levelTxt);
+			int count = ItemController.I.allModels.Count;
 			byte[] bytes = img.EncodeToPNG();
         	File.WriteAllBytes(Application.dataPath + "/../Assets/Resources/img" + (count-1) + ".png", bytes);
 			img = null;
@@ -89,14 +89,14 @@ public class AdminPanel : MonoBehaviour {
 			attention.text = "text/image is missing";
 		}
 		
-	}
+	}*/
 
 	void SaveLevelsToPrefs()
 	{
-		PlayerPrefs.SetInt("levelsCount", ItemController.I.models.Count);
-		for(int i = 0; i < ItemController.I.models.Count; i++)
+		PlayerPrefs.SetInt("levelsCount", ItemController.I.allModels.Count);
+		for(int i = 0; i < ItemController.I.allModels.Count; i++)
 		{
-			PlayerPrefs.SetString("level" + i, JsonUtility.ToJson(ItemController.I.models[i]));
+			PlayerPrefs.SetString("level" + i, JsonUtility.ToJson(ItemController.I.allModels[i]));
 		}
 	}
 }
