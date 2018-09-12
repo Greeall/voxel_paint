@@ -7,8 +7,10 @@ public class Nib : MonoBehaviour {
 
 	public GameObject colorNumberPrefab;
 
-
+	//public Scroll
 	public Model3d modelGenerator;
+
+	public GameObject parent;
 	public static int nib = 0;
 
 	public static Color nibColor = Color.clear;
@@ -20,6 +22,9 @@ public class Nib : MonoBehaviour {
 		DisplayPalette();
 		RectTransform _rect = GetComponent<RectTransform>();
 		_rect.sizeDelta = new Vector2(_rect.sizeDelta.x, Screen.height/ 9f);
+		parent.GetComponent<RectTransform>().sizeDelta = new Vector2(_rect.sizeDelta.x, Screen.height/ 9f);
+
+		_rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, Screen.height/ 15f);
 	}
 	
 	// Update is called once per frame
@@ -54,7 +59,7 @@ public class Nib : MonoBehaviour {
 			colorNumber.GetComponent<Button>().GetComponent<Image>().color = cellColor;
 			Debug.Log("color" + cellColor);
 			colorNumber.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
-			colorNumber.transform.SetParent(GetComponent<RectTransform>());
+			colorNumber.transform.SetParent(parent.transform);
 			colorNumber.transform.localPosition = pos;	
 			x += offset;
 			i++;
