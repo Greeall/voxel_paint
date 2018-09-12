@@ -52,7 +52,6 @@ public class VoxelDrawing : MonoBehaviour {
 						Model3d.readyVoxels++;
 						StartCoroutine(making_voxel.SmoothCreateVoxel());
 						SetReadyVoxel(hit.transform.position);
-					//	Debug.Log("position" + hit.transform.position);
 					}
             	}
 			}
@@ -73,7 +72,6 @@ public class VoxelDrawing : MonoBehaviour {
 		{
 			if(pos.x == plat.position.x && pos.z == plat.position.y)
 			{
-			//	Debug.Log("setting voxel as drawn");
 				ItemController.I.allModels[ItemController.I.selectedItem]._model[Model3d.staticLayer].layer[i].isDrawing = true;
 			}
 			i++;

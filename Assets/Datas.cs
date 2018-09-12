@@ -9,6 +9,7 @@ public class Datas {
 	public List<Layer> _model;
 
 	public bool _isBeginning;
+	public bool _isFinished;
 
 	public Vector3 _mainPosition;
 
@@ -16,11 +17,14 @@ public class Datas {
 
 	public float _mainZoom;
 
-	public Datas(List<VoxelColor> _c, List<Layer> _m, bool _is, Vector3 _mPos, Vector3 _mRot, float zoom)
+	
+
+	public Datas(List<VoxelColor> _c, List<Layer> _m, bool _isB, bool _isF, Vector3 _mPos, Vector3 _mRot, float zoom)
 	{
 		_model = _m;
 		_colors = _c;
-		_isBeginning = _is;
+		_isBeginning = _isB;
+		_isFinished = _isF;
 		_mainPosition = _mPos;
 		_mainRotation = _mRot;
 		_mainZoom = zoom;

@@ -34,7 +34,7 @@ public class ScreenshotMaker : MonoBehaviour {
      		bytes = virtualPhoto.EncodeToPNG();
      
      		System.IO.File.WriteAllBytes("Assets\\Resources\\homeImg" + ItemController.I.selectedItem + ".png", bytes );
-			Debug.Log("made screen"); 
+		//	Debug.Log("made screen"); 
 		}
 	}
 }

@@ -47,6 +47,11 @@ public class Model3d : MonoBehaviour {
 		DisplayReadyVoxels();
 		DisplayLayer(staticLayer);
 		
+		foreach(VoxelColor c in colors)
+		{
+			Debug.Log(c.color);
+		}
+
 		//SaveToTxt();
 	}
 
@@ -54,17 +59,19 @@ public class Model3d : MonoBehaviour {
 	{
 		bool firstUnreadyVoxelIsFound = false;
 		int i = 0;
+		int _readyVxls = 0;
 		
 		foreach(Layer l in model)
 		{
+			_readyVxls = 0;
 			foreach(VoxelPlatform v in l.layer)
 			{
 				if(v.isDrawing) //вносить изменения сюда а не только в итемконтроллер или добывать данные из итемконтроллера???
 				{
-					GameObject voxel = Instantiate(voxelPrefab, new Vector3(v.position.x, staticLayer, v.position.y), voxelPrefab.transform.rotation) as GameObject;
+					GameObject voxel = Instantiate(voxelPrefab, new Vector3(v.position.x, i, v.position.y), voxelPrefab.transform.rotation) as GameObject;
 					voxel.GetComponentInChildren<Renderer>().material.color = v.FindColor(colors);
 					voxel.transform.localScale = new Vector3(1,1,1);
-					//Debug.Log("CREATING");//не візівается
+					_readyVxls += 1;
 				}
 				else if(!firstUnreadyVoxelIsFound)
 				{
@@ -73,15 +80,16 @@ public class Model3d : MonoBehaviour {
 				}
 			}
 			i++;
+			if(firstUnreadyVoxelIsFound)
+				break;
 		}
 
-	
-
+		readyVoxels = _readyVxls;
 	}
 	
 	void SaveToTxt()
 	{
-		Datas data = new Datas(colors, model, false, mainPosition, mainRotation, mainZoom);
+		Datas data = new Datas(colors, model, false, false, mainPosition, mainRotation, mainZoom);
 		string txt = JsonUtility.ToJson(data);
 		System.IO.File.WriteAllText("model.txt", txt);
 	}
@@ -89,19 +97,20 @@ public class Model3d : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(CheckAllVoxelOnLayer() && readyVoxels > 0)
+		if(staticLayer < model.Count)
 		{
-			readyVoxels = 0;
-			staticLayer += 1;
-			if(staticLayer < model.Count - 1)
+			if(CheckAllVoxelOnLayer() && readyVoxels > 0)
 			{
-				//Debug.Log("LAYER - " + staticLayer);
-				DisplayLayer(staticLayer);
+				readyVoxels = 0;
+				staticLayer += 1;
+				if(staticLayer < model.Count)
+					DisplayLayer(staticLayer);
 			}
 		}
-
-		
-		
+		if(staticLayer == model.Count)
+		{
+			Debug.Log("FINISHED MODEL! =))");
+		}
 	}
 
 	

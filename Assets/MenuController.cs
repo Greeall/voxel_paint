@@ -11,13 +11,11 @@ public class MenuController : MonoBehaviour {
 
 	public Text testo;
 
-	//public Text test;
-
 	public Image menu;
 	// Use this for initialization
 	void Start () {
 		
-		Debug.Log(menu.GetComponent<RectTransform>().offsetMin);
+//		Debug.Log(menu.GetComponent<RectTransform>().offsetMin);
 
 		menu.GetComponent<RectTransform>().offsetMin = new Vector2(Screen.width / 20f, Screen.height / 5f);
 		menu.GetComponent<RectTransform>().offsetMax = new Vector2( - Screen.width / 20f, - Screen.height / 10f );
@@ -55,8 +53,9 @@ public class MenuController : MonoBehaviour {
 			a.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
 			a.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 			
-			Sprite img = GetSpriteFromResources(i, "img");
-			a.GetComponent<Image>().sprite = img;
+			a.GetComponentInChildren<Text>().text = CountUpVoxels(i).ToString();
+			//Sprite img = GetSpriteFromResources(i, "img");
+			//a.GetComponent<Image>().sprite = img;
 
 			x += itemWidth + itemPadding;
 			if(i%2 == 1)
@@ -65,6 +64,14 @@ public class MenuController : MonoBehaviour {
 				x = 0;
 			}
 		}
+	}
+
+	int CountUpVoxels(int i)
+	{
+		int quantity = 0;
+		foreach(Layer l in ItemController.I.allModels[i]._model)
+			quantity += l.layer.Count;
+		return quantity;
 	}
 
 
@@ -109,8 +116,10 @@ public class MenuController : MonoBehaviour {
 	public void OpenLevel(int y)
 	{
 		ItemController.I.selectedItem = y;
+		//Debug.Log(ItemController.I.selectedItem);
 		ItemController.I.allModels[y]._isBeginning = true;
 		ItemController.I.AddLevelToHomeMenu();
+		PlayerPrefs.SetInt("SelectedItem", y);
 		Application.LoadLevel("VoxelPaint");
 	}
 
@@ -140,15 +149,9 @@ public class MenuController : MonoBehaviour {
 	 {
 	 	Sprite img;
 		string path = imgPath + i;
-		Debug.Log(path);
  		Texture2D tex = null;
 		tex = Resources.Load<Texture2D>(path);
-		// Color[] 
-
-
 		img = Sprite.Create(tex, new Rect(0,0, tex.width, tex.height), new Vector2(0.5f, 0.5f)); 
-
-		
 		return img;
 	}
 
