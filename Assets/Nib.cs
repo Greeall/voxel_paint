@@ -10,20 +10,22 @@ public class Nib : MonoBehaviour {
 	//public Scroll
 	public Model3d modelGenerator;
 
+//	public List<VoxelColor> colors;  //to datas
 	public GameObject parent;
 	public static int nib = 0;
 
 	public static Color nibColor = Color.clear;
 	public static bool painting = false;
 
+	public RectTransform colorsPanel;
+
 	//public GameObject reductionButton;
 
 	void Start () {
 		DisplayPalette();
+		AdjustContentWidth();
 		RectTransform _rect = GetComponent<RectTransform>();
 		_rect.sizeDelta = new Vector2(_rect.sizeDelta.x, Screen.height/ 9f);
-		parent.GetComponent<RectTransform>().sizeDelta = new Vector2(_rect.sizeDelta.x, Screen.height/ 9f);
-
 		_rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, Screen.height/ 15f);
 	}
 	
@@ -46,6 +48,7 @@ public class Nib : MonoBehaviour {
 		float offset = width + width/10;
 		int i = 1;
 		foreach(VoxelColor c in ItemController.I.allModels[ItemController.I.selectedItem]._colors)
+	//foreach(VoxelColor c in colors)
 		{
 			Vector3 pos = new Vector3(x,y,0f);
 			
@@ -64,6 +67,11 @@ public class Nib : MonoBehaviour {
 			x += offset;
 			i++;
 		}
+	}
+
+	void AdjustContentWidth() {
+		float buttonsWidht = Screen.height/ 10f * (ItemController.I.allModels[ItemController.I.selectedItem]._colors.Count + 1);
+		colorsPanel.sizeDelta = new Vector2(buttonsWidht, Screen.height/ 19f);
 	}
 
 	void ChangeColor(Color i, GameObject b)

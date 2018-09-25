@@ -110,9 +110,10 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
-a178b9ea832cb1e30685832fcc2b3011 Assembly-CSharp.dll:.MakingVoxel
-fe6546b234be2ff86624a05563d78b2d Assembly-CSharp.dll:.Nib
-aa4090c52666d4d2afbabd9e9e9f9f51 Assembly-CSharp.dll:.MenuController
+89c6771e3282eb4bf4fab97e71d2edd5 Assembly-CSharp.dll:.MakingVoxel
+d5abb74048267f9b0bae50f320960bdf Assembly-CSharp.dll:.Nib
+300aa8ac3e9841869f960c572ce58166 Assembly-CSharp.dll:.MenuController
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.VertScrollController
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -128,7 +129,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ScreenshotMaker
-e1e7fa56059d6f01ef059c09d9f5bf2d Assembly-CSharp.dll:.Model3d
+cbaa55c2eec4d8524cbc0a92d5951981 Assembly-CSharp.dll:.Model3d
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 5f2ad81aa8994e8fbe25d1e57afe6773 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -142,6 +143,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 308e6ad9e332cb1dc71c9b7b8fa9f42c Assembly-CSharp.dll:.ItemController
 516815c550f63194d8e64dd3d95b107a Assembly-CSharp.dll:.modelMainPosition
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.testTouch
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Navigation
 eaef548a4b045e61eb59e51803a129f8 Assembly-CSharp.dll:.HomeMenuController
 8de1c20a61e1e697ba5623166410502e Assembly-CSharp.dll:.OrbitCamera
 3bb942c9d67431213b3bb439cabbc72c Assembly-CSharp.dll:.canvasController

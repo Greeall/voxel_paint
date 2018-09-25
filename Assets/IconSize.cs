@@ -9,5 +9,6 @@ public class IconSize : MonoBehaviour {
 	void Start () {
 		float widthHeight = Screen.width / coeff;
 		GetComponent<RectTransform>().sizeDelta = new Vector2(widthHeight, widthHeight);
+	
 	}
 }

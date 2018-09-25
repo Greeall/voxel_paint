@@ -22,7 +22,7 @@ public class modelMainPosition : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+		AdjustToNormalPosition();
 	}
 	
 	// Update is called once per frame
@@ -75,7 +75,6 @@ public class modelMainPosition : MonoBehaviour {
 			yRot = Mathf.Lerp(yRot, mainCameraRot.y, stepX);
 			
 			mainCamera.eulerAngles = new Vector3(xRot, yRot, 0f);
-			
 			yield return new WaitForSeconds(tim/ steps);
 		}
 		isReductionProcess = false;
@@ -99,6 +98,15 @@ public class modelMainPosition : MonoBehaviour {
 			GetComponent<Image>().sprite = gray;
 		}
 
+	}
+
+	void AdjustToNormalPosition()
+	{
+		mainCameraRot = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;
+		centralAxisPos = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;
+		centralAxis.position = centralAxisPos;
+		mainCamera.eulerAngles = mainCameraRot;
+		mainCamera.GetComponent<Camera>().orthographicSize = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
 	}
 
 }

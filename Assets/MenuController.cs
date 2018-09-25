@@ -9,6 +9,12 @@ public class MenuController : MonoBehaviour {
 	public GameObject itemPrefab;
 	public GameObject content;
 
+
+	public Sprite ready;
+	public Sprite inProcess;
+
+	public Sprite crown;
+
 	public Text testo;
 
 	public Image menu;
@@ -22,7 +28,17 @@ public class MenuController : MonoBehaviour {
 		DisplayItems();
 
 	}
-	
+
+	void Update()
+	{
+		if(Application.platform == RuntimePlatform.Android)
+		{
+			if(Input.GetKeyDown(KeyCode.Escape))
+			{
+				Application.Quit();
+			}
+		}
+	}
 
 
 
@@ -45,17 +61,18 @@ public class MenuController : MonoBehaviour {
 		testo.text = PlayerPrefs.GetInt("levelsCount", -3).ToString();
 		for(int i = 0; i < ItemController.I.allModels.Count; i++)
 		{
-
-			GameObject a = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
-			a.transform.SetParent(content.transform);
-			a.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
 			int number = i;
-			a.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
-			a.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+			GameObject level = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
+			SetMiniIcons(level, number);
 			
-			a.GetComponentInChildren<Text>().text = CountUpVoxels(i).ToString();
-			//Sprite img = GetSpriteFromResources(i, "img");
-			//a.GetComponent<Image>().sprite = img;
+
+			level.transform.SetParent(content.transform);
+			level.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
+		
+			level.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
+			level.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+			
+			level.GetComponentInChildren<Text>().text = CountUpVoxels(i).ToString();
 
 			x += itemWidth + itemPadding;
 			if(i%2 == 1)
@@ -155,5 +172,23 @@ public class MenuController : MonoBehaviour {
 		return img;
 	}
 
+	void SetMiniIcons(GameObject level, int i)
+	{
+		if(ItemController.I.allModels[i]._isFinished)
+		{
+			Image[] imgs = level.GetComponentsInChildren<Image>();
+			imgs[1].sprite = ready;
+		}
+		else if(ItemController.I.allModels[i]._isBeginning)
+		{
+			Image[] imgs = level.GetComponentsInChildren<Image>();
+			imgs[1].sprite = inProcess;
+		}
+		if(ItemController.I.allModels[i]._isVip)
+		{
+			Image[] imgs = level.GetComponentsInChildren<Image>();
+			imgs[2].sprite = crown;
+		}
+	}
 	
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class OrbitCamera : MonoBehaviour {
 
@@ -14,8 +16,9 @@ public class OrbitCamera : MonoBehaviour {
 	
 	Camera _camera;
 
+	
 	Touch touch0, touch1;
-	void Start () {
+	void Awake () {
 		offset = Vector3.Distance(obj.transform.position, transform.position); //distance between camera and human
 		restrictedOffset = offset;									// min distance = distance
 		transform.LookAt(obj); 										//camera look at human
@@ -30,24 +33,41 @@ public class OrbitCamera : MonoBehaviour {
 		
 		float distance = Vector3.Distance(obj.transform.position, transform.position); //distance beetwen camera and human
 		Vector3 translate = Vector3.zero; 
+
+		/*if(Input.GetMouseButton(0))
+		{
+			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
+    		PointerEventData m_PointerEventData;
+			m_PointerEventData = new PointerEventData(EventSystem.current);
+            m_PointerEventData.position = Input.mousePosition;
+			List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(m_PointerEventData, results);
+		}*/
 		
 		if(Input.touchCount == 1 && !Nib.painting)
 		{
-			Touch _touch = Input.GetTouch(0);
-			Vector2 _offset = Vector2.zero;
-			if(_touch.phase == TouchPhase.Moved)
-				_offset = _touch.deltaPosition;
-			else
-				_offset = Vector2.zero;
-	
-			Vector3 rot = new Vector3(0f, _offset.x, 0);
+			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
+    		PointerEventData m_PointerEventData;
+			m_PointerEventData = new PointerEventData(EventSystem.current);
+            m_PointerEventData.position = Input.mousePosition;
+			List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(m_PointerEventData, results);
 
-			transform.Rotate(rot * Time.deltaTime * speed, Space.World);
-
-			float angle = transform.localEulerAngles.x;  //
- 			angle = (angle > 180) ? angle - 360 : angle; //read rotation.x with sign minus
-			transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
-
+			if(results.Count < 1)
+			{
+				Touch _touch = Input.GetTouch(0);
+				Vector2 _offset = Vector2.zero;
+				if(_touch.phase == TouchPhase.Moved)
+					_offset = _touch.deltaPosition;
+				else
+					_offset = Vector2.zero;
+		
+				Vector3 rot = new Vector3(0f, _offset.x, 0);
+				transform.Rotate(rot * Time.deltaTime * speed, Space.World);
+				float angle = transform.localEulerAngles.x;  //
+				angle = (angle > 180) ? angle - 360 : angle; //read rotation.x with sign minus
+				transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
+			}
 		}
 
 

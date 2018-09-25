@@ -12,14 +12,23 @@ public class ScreenshotMaker : MonoBehaviour {
 		screenCamera.transform.position = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;		//
 		screenCamera.transform.eulerAngles = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;   //
 		screenCamera.transform.Translate(Vector3.back * 100f);
+		StartCoroutine(MakingScreen());
 	}
 	
-	// Update is called once per frame
-	void Update () 
+
+
+	IEnumerator MakingScreen()
 	{
-		if(Input.GetKeyDown("s"))
+		for(;;)
 		{
-			int height = Screen.height ;
+			ScreenShot();
+			yield return new WaitForSeconds(15f);
+		}
+	}
+
+	void ScreenShot()
+	{
+		int height = Screen.height ;
 			int width = Screen.width; 
 			int size = 512;
 			RenderTexture rt = new RenderTexture(size, size, 24);
@@ -34,7 +43,5 @@ public class ScreenshotMaker : MonoBehaviour {
      		bytes = virtualPhoto.EncodeToPNG();
      
      		System.IO.File.WriteAllBytes("Assets\\Resources\\homeImg" + ItemController.I.selectedItem + ".png", bytes );
-		//	Debug.Log("made screen"); 
-		}
 	}
 }

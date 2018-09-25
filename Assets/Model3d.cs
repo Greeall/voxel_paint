@@ -26,6 +26,8 @@ public class Model3d : MonoBehaviour {
 
 	public float mainZoom;  // to datas
 
+	public bool isVIP; //to datas
+
 	
 
 	public GameObject platformPrefab;
@@ -43,16 +45,16 @@ public class Model3d : MonoBehaviour {
 		colors = new List<VoxelColor>(ItemController.I.allModels[changed]._colors);
 		model = new List<Layer>(ItemController.I.allModels[changed]._model);
 		
-		
+		//Debug.Log("is begin - " + ItemController.I.allModels[changed]._isBeginning);
 		DisplayReadyVoxels();
 		DisplayLayer(staticLayer);
 		
-		foreach(VoxelColor c in colors)
-		{
-			Debug.Log(c.color);
-		}
+		//foreach(VoxelColor c in colors)
+		//{
+		//	Debug.Log(c.color);
+		//}
 
-		//SaveToTxt();
+		SaveToTxt();
 	}
 
 	void DisplayReadyVoxels()
@@ -89,9 +91,9 @@ public class Model3d : MonoBehaviour {
 	
 	void SaveToTxt()
 	{
-		Datas data = new Datas(colors, model, false, false, mainPosition, mainRotation, mainZoom);
+		Datas data = new Datas(colors, model, false, false, mainPosition, mainRotation, mainZoom, isVIP);
 		string txt = JsonUtility.ToJson(data);
-		System.IO.File.WriteAllText("model.txt", txt);
+		System.IO.File.WriteAllText("modello.txt", txt);
 	}
 
 	// Update is called once per frame
@@ -107,8 +109,10 @@ public class Model3d : MonoBehaviour {
 					DisplayLayer(staticLayer);
 			}
 		}
-		if(staticLayer == model.Count)
+		if(staticLayer == model.Count && ItemController.I.allModels[ItemController.I.selectedItem]._isFinished != true)
 		{
+			ItemController.I.allModels[ItemController.I.selectedItem]._isFinished = true;
+			ItemController.I.allModels[ItemController.I.selectedItem]._isBeginning = false;
 			Debug.Log("FINISHED MODEL! =))");
 		}
 	}

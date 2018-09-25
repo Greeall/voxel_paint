@@ -17,9 +17,11 @@ public class Datas {
 
 	public float _mainZoom;
 
+	public bool _isVip;
+
 	
 
-	public Datas(List<VoxelColor> _c, List<Layer> _m, bool _isB, bool _isF, Vector3 _mPos, Vector3 _mRot, float zoom)
+	public Datas(List<VoxelColor> _c, List<Layer> _m, bool _isB, bool _isF, Vector3 _mPos, Vector3 _mRot, float zoom, bool vip)
 	{
 		_model = _m;
 		_colors = _c;
@@ -28,6 +30,7 @@ public class Datas {
 		_mainPosition = _mPos;
 		_mainRotation = _mRot;
 		_mainZoom = zoom;
+		_isVip = vip;
 	}
 
     public bool isExist()

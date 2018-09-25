@@ -26,18 +26,18 @@ public class ItemController : MonoBehaviour {
 		ItemController.I.allModels = new List<Datas>();
 		selectedItem = PlayerPrefs.GetInt("SelectedItem", 0);
 		//PlayerPrefs.SetInt("firstLaunch", 0);
-	//	if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
-		//{
+		if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
+		{
 			ReadLevelsFromStore();
 			//Debug.Log("read from store");
-	//	}
-	//	else
-	//	{
-		//	ReadLevelsFromPref();
+		}
+		else
+		{
+			ReadLevelsFromPref();
 			//Debug.Log("read from pref");
-	//	}
+		}
 
-		//ReadHomeLevelsFromStore();
+		ReadHomeLevelsFromStore();
 	}
 
 	void Update()
@@ -63,7 +63,7 @@ public class ItemController : MonoBehaviour {
 	
 	void Start()
 	{
-		SaveHomeItemsToPref();
+		//SaveHomeItemsToPref();
 	}
 
 	void ReadLevelsFromPref()

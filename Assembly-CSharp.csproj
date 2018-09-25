@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\AdminPanel.cs" />
      <Compile Include="Assets\canvasController.cs" />
+     <Compile Include="Assets\CoinsController.cs" />
      <Compile Include="Assets\ColorVoxel.cs" />
      <Compile Include="Assets\DataModel3d.cs" />
      <Compile Include="Assets\Datas.cs" />
@@ -71,11 +72,13 @@
      <Compile Include="Assets\Settings.cs" />
      <Compile Include="Assets\TargetPalette.cs" />
      <Compile Include="Assets\testTouch.cs" />
+     <Compile Include="Assets\VertScrollController.cs" />
      <Compile Include="Assets\VoxelColor.cs" />
      <Compile Include="Assets\VoxelDrawing.cs" />
      <Compile Include="Assets\VoxelPlatform.cs" />
      <None Include="Assets\Resources\model0.txt" />
      <None Include="Assets\Resources\model2.txt" />
+     <None Include="Assets\Resources\model3.txt" />
      <None Include="Assets\Resources\model1.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

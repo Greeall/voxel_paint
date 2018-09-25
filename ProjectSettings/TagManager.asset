@@ -14,8 +14,8 @@ TagManager:
   - 
   - 
   - voxel
-  - 
-  - 
+  - particle
+  - palette
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: a
+    uniqueID: 3815249121
     locked: 0
