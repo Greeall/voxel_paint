@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Model3d : MonoBehaviour {
 
 	public static int readyVoxels = 0;
 	public Transform platformParent;
+
+	public Camera mainCamera;
+
+	public GameObject canvas;
+
+	public GameObject floor;
+
 	public static int staticLayer = 0;
 	public Material platformMaterial;
 
@@ -32,6 +40,8 @@ public class Model3d : MonoBehaviour {
 
 	public GameObject platformPrefab;
 
+	public ParticleSystem firework;
+
 
 	void Awake()
 	{
@@ -45,16 +55,14 @@ public class Model3d : MonoBehaviour {
 		colors = new List<VoxelColor>(ItemController.I.allModels[changed]._colors);
 		model = new List<Layer>(ItemController.I.allModels[changed]._model);
 		
-		//Debug.Log("is begin - " + ItemController.I.allModels[changed]._isBeginning);
 		DisplayReadyVoxels();
-		DisplayLayer(staticLayer);
-		
-		//foreach(VoxelColor c in colors)
-		//{
-		//	Debug.Log(c.color);
-		//}
 
-		SaveToTxt();
+		if(!ItemController.I.allModels[changed]._isFinished)
+			DisplayLayer(staticLayer); 
+
+		
+	
+	//	SaveToTxt();
 	}
 
 	void DisplayReadyVoxels()
@@ -96,13 +104,16 @@ public class Model3d : MonoBehaviour {
 		System.IO.File.WriteAllText("modello.txt", txt);
 	}
 
-	// Update is called once per frame
 	void Update () 
 	{
+		if(Input.GetKeyDown("e"))
+			Ending();
+
 		if(staticLayer < model.Count)
 		{
 			if(CheckAllVoxelOnLayer() && readyVoxels > 0)
 			{
+				ItemController.I.allModels[ItemController.I.selectedItem]._model[staticLayer].isDrawing = true;
 				readyVoxels = 0;
 				staticLayer += 1;
 				if(staticLayer < model.Count)
@@ -113,8 +124,10 @@ public class Model3d : MonoBehaviour {
 		{
 			ItemController.I.allModels[ItemController.I.selectedItem]._isFinished = true;
 			ItemController.I.allModels[ItemController.I.selectedItem]._isBeginning = false;
-			Debug.Log("FINISHED MODEL! =))");
+			Ending();
 		}
+
+
 	}
 
 	
@@ -137,9 +150,38 @@ public class Model3d : MonoBehaviour {
 			Material newMaterial = new Material(platformMaterial);
 			newMaterial.mainTexture = v.FindTexture(colors);
 			platform.GetComponent<MeshRenderer>().material = newMaterial;
-
 			platform.GetComponent<ColorVoxel>().color = v.FindColor(colors);
 		}
+	}
+
+	void Ending()
+	{
+		StartCoroutine(modelMainPosition.I.Smooth());
+		float zoom = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
+		floor.SetActive(false);
+		canvas.SetActive(false);
+		firework.gameObject.transform.localScale = new Vector3(zoom * 2/ 10f, zoom * 2/ 10f, zoom * 2/ 10f);
+		StartCoroutine(Rotation());
+		
+		
+	}
+
+	IEnumerator Rotation()
+	{
+		float time = 2f;
+		int steps = 40;
+		Color lerpedColor;
+		for(int i = 0; i < steps; i++)
+		{
+			lerpedColor = Color.Lerp(Color.white, new Color(0.141f, 0.019f, 0.152f, 1f), (float)i/steps);
+			mainCamera.backgroundColor = lerpedColor;
+			float zoom = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
+			float z = Mathf.Lerp(zoom, 2 * zoom, (float)i/steps);
+			mainCamera.orthographicSize = z;
+			yield return new WaitForSeconds (time/steps);
+		}
+		firework.gameObject.SetActive(true);
+		
 	}
 }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CoinsController : MonoBehaviour {
 
+	public GameObject adverisingOffer;
 	public int coins = 4;
 	public Text coinsText;
 	public static CoinsController I;
@@ -14,6 +15,7 @@ public class CoinsController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		I = this;
+		//PlayerPrefs.SetInt("coins", 0);
 		coins = PlayerPrefs.GetInt("coins", 2);
 	}
 	
@@ -39,5 +41,14 @@ public class CoinsController : MonoBehaviour {
 		PlayerPrefs.SetInt("coins", coins);
 	}
 
+	public void OpenAdvertisingOffer()
+	{
+		adverisingOffer.SetActive(true);
+	}
+
+	public void CloseAdvertisingOffer()
+	{
+		adverisingOffer.SetActive(false);
+	}
 
 }

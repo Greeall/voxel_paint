@@ -15,13 +15,18 @@ public class modelMainPosition : MonoBehaviour {
 	bool isActive = true;
 	bool isReductionProcess = false;
 
+	public static int layer = 0;
+
 	public Sprite black;
 	public Sprite gray;
+
+	public static modelMainPosition I;
 
 
 	// Use this for initialization
 	void Start () 
 	{
+		I = this;
 		AdjustToNormalPosition();
 	}
 	
@@ -39,7 +44,7 @@ public class modelMainPosition : MonoBehaviour {
 			StartCoroutine(Smooth());
 	}
 
-	IEnumerator Smooth()
+	public IEnumerator Smooth()
 	{
 		
 		isReductionProcess = true;
@@ -104,9 +109,21 @@ public class modelMainPosition : MonoBehaviour {
 	{
 		mainCameraRot = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;
 		centralAxisPos = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;
-		centralAxis.position = centralAxisPos;
+	
 		mainCamera.eulerAngles = mainCameraRot;
 		mainCamera.GetComponent<Camera>().orthographicSize = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
+
+		if(ItemController.I.allModels[ItemController.I.selectedItem]._isFinished)
+			centralAxis.position = centralAxisPos;
+		else
+		{
+			int readyLevelsCount = 0;
+			foreach(Layer lvl in ItemController.I.allModels[ItemController.I.selectedItem]._model)
+				if(lvl.isDrawing)
+					readyLevelsCount++;
+			centralAxis.position = new Vector3(centralAxisPos.x, readyLevelsCount, centralAxisPos.z);
+		}
+
 	}
 
 }

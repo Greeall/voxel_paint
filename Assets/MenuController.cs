@@ -9,6 +9,8 @@ public class MenuController : MonoBehaviour {
 	public GameObject itemPrefab;
 	public GameObject content;
 
+	public GameObject advertising;
+
 
 	public Sprite ready;
 	public Sprite inProcess;
@@ -69,7 +71,7 @@ public class MenuController : MonoBehaviour {
 			level.transform.SetParent(content.transform);
 			level.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
 		
-			level.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
+			level.GetComponent<Button>().onClick.AddListener(() => TryOpenLevel(number));
 			level.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 			
 			level.GetComponentInChildren<Text>().text = CountUpVoxels(i).ToString();
@@ -130,15 +132,37 @@ public class MenuController : MonoBehaviour {
 			}
 		}
 	}
-	public void OpenLevel(int y)
+	public void TryOpenLevel(int y)
+	{
+		Datas item = ItemController.I.allModels[y];
+		Debug.Log("vip - " + item._isVip + " beg - " + item._isBeginning + " end - " + item._isFinished);
+		if(item._isVip && !item._isBeginning && !item._isFinished)
+		{
+			if(CoinsController.I.coins - 2 >= 0)
+			{
+				Debug.Log("kususs");
+				CoinsController.I.coins -= 2;
+				OpenLevel(y);
+			}
+			else
+				advertising.SetActive(true);
+		}
+		else
+		{
+			OpenLevel(y);
+			Debug.Log("kususs");
+		}
+	}
+
+	void OpenLevel(int y)
 	{
 		ItemController.I.selectedItem = y;
-		//Debug.Log(ItemController.I.selectedItem);
 		ItemController.I.allModels[y]._isBeginning = true;
 		ItemController.I.AddLevelToHomeMenu();
 		PlayerPrefs.SetInt("SelectedItem", y);
 		Application.LoadLevel("VoxelPaint");
 	}
+
 
 	public void OpenHomeItems()
 	{

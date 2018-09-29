@@ -53,10 +53,12 @@
   <ItemGroup>
      <Compile Include="Assets\AdminPanel.cs" />
      <Compile Include="Assets\canvasController.cs" />
+     <Compile Include="Assets\Clearing.cs" />
      <Compile Include="Assets\CoinsController.cs" />
      <Compile Include="Assets\ColorVoxel.cs" />
      <Compile Include="Assets\DataModel3d.cs" />
      <Compile Include="Assets\Datas.cs" />
+     <Compile Include="Assets\EndModeling.cs" />
      <Compile Include="Assets\HomeMenuController.cs" />
      <Compile Include="Assets\IconSize.cs" />
      <Compile Include="Assets\ItemController.cs" />
