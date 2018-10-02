@@ -9,7 +9,6 @@ public class ScreenshotMaker : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		screenCamera = GetComponent<Camera>();
-		Debug.Log("SELECTED = " + ItemController.I.allModels.Count);
 		screenCamera.transform.position = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;		//
 		screenCamera.transform.eulerAngles = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;   //
 		screenCamera.transform.Translate(Vector3.back * 100f);
@@ -23,7 +22,7 @@ public class ScreenshotMaker : MonoBehaviour {
 		for(;;)
 		{
 			ScreenShot();
-			yield return new WaitForSeconds(15f);
+			yield return new WaitForSeconds(1f);
 		}
 	}
 

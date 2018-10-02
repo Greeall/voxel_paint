@@ -101,7 +101,7 @@ public class MenuController : MonoBehaviour {
 		float itemPadding = itemWidth / 3f;
 		float y = - itemPadding;
 
-
+		
 		//int halfOfItems = (ItemController.I.models.Count%2 == 0) ? ItemController.I.models.Count / 2 : ItemController.I.models.Count / 2 + 1;
 		float contentHeight = 5 * (itemWidth + itemPadding);
 
@@ -113,11 +113,18 @@ public class MenuController : MonoBehaviour {
 		testo.text = PlayerPrefs.GetInt("homeLevelsCount", -1).ToString();
 		for(int i = 0; i < ItemController.I.homeModels.Count; i++)
 		{
-
+//			Debug.Log("Home number - " + ItemController.I.homeModels[i] + "; i - " + i);
 			GameObject a = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
+
+			
+
 			a.transform.SetParent(content.transform);
 			a.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
 			int number = ItemController.I.homeModels[i];
+
+			Text[] imgs = a.GetComponentsInChildren<Text>();
+			imgs[1].text = Process(number);
+
 			a.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
 			a.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 			
@@ -135,12 +142,11 @@ public class MenuController : MonoBehaviour {
 	public void TryOpenLevel(int y)
 	{
 		Datas item = ItemController.I.allModels[y];
-		Debug.Log("vip - " + item._isVip + " beg - " + item._isBeginning + " end - " + item._isFinished);
+//		Debug.Log("vip - " + item._isVip + " beg - " + item._isBeginning + " end - " + item._isFinished);
 		if(item._isVip && !item._isBeginning && !item._isFinished)
 		{
 			if(CoinsController.I.coins - 2 >= 0)
 			{
-				Debug.Log("kususs");
 				CoinsController.I.coins -= 2;
 				OpenLevel(y);
 			}
@@ -150,7 +156,6 @@ public class MenuController : MonoBehaviour {
 		else
 		{
 			OpenLevel(y);
-			Debug.Log("kususs");
 		}
 	}
 
@@ -213,6 +218,28 @@ public class MenuController : MonoBehaviour {
 			Image[] imgs = level.GetComponentsInChildren<Image>();
 			imgs[2].sprite = crown;
 		}
+	}
+
+	string Process(int i)
+	{
+		int count = 0;
+		int all = CountUpVoxels(i);
+		foreach(Layer l in ItemController.I.allModels[i]._model)
+		{
+			if(l.isDrawing)
+				count += l.layer.Count;
+			else
+			{
+				foreach(VoxelPlatform v in l.layer)
+					if(v.isDrawing)
+						count +=1;
+				break;
+			}
+		}
+
+		int procent = count * 100 / all;
+		
+		return procent + "%";
 	}
 	
 }

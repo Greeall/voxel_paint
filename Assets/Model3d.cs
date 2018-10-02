@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Model3d : MonoBehaviour {
 
+
 	public static int readyVoxels = 0;
 	public Transform platformParent;
 
@@ -13,6 +14,8 @@ public class Model3d : MonoBehaviour {
 	public GameObject canvas;
 
 	public GameObject floor;
+
+	public GameObject shareButton;
 
 	public static int staticLayer = 0;
 	public Material platformMaterial;
@@ -42,14 +45,8 @@ public class Model3d : MonoBehaviour {
 
 	public ParticleSystem firework;
 
-
-	void Awake()
-	{
-		
-	}
 	// Use this for initialization
 	void Start () {
-		
 		int changed = ItemController.I.selectedItem;
 		
 		colors = new List<VoxelColor>(ItemController.I.allModels[changed]._colors);
@@ -59,10 +56,6 @@ public class Model3d : MonoBehaviour {
 
 		if(!ItemController.I.allModels[changed]._isFinished)
 			DisplayLayer(staticLayer); 
-
-		
-	
-	//	SaveToTxt();
 	}
 
 	void DisplayReadyVoxels()
@@ -106,8 +99,8 @@ public class Model3d : MonoBehaviour {
 
 	void Update () 
 	{
-		if(Input.GetKeyDown("e"))
-			Ending();
+		//if(Input.GetKeyDown("e"))
+		//	Ending();
 
 		if(staticLayer < model.Count)
 		{
@@ -126,11 +119,7 @@ public class Model3d : MonoBehaviour {
 			ItemController.I.allModels[ItemController.I.selectedItem]._isBeginning = false;
 			Ending();
 		}
-
-
 	}
-
-	
 
 	bool CheckAllVoxelOnLayer()
 	{
@@ -140,7 +129,7 @@ public class Model3d : MonoBehaviour {
 			return false;
 	}
 
-	void DisplayLayer(int i)
+	public void DisplayLayer(int i)
 	{
 		foreach(VoxelPlatform v in model[i].layer)
 		{
@@ -159,11 +148,21 @@ public class Model3d : MonoBehaviour {
 		StartCoroutine(modelMainPosition.I.Smooth());
 		float zoom = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
 		floor.SetActive(false);
-		canvas.SetActive(false);
+		//canvas.SetActive(false);
 		firework.gameObject.transform.localScale = new Vector3(zoom * 2/ 10f, zoom * 2/ 10f, zoom * 2/ 10f);
 		StartCoroutine(Rotation());
+		Transform[] canvasObjcts = canvas.GetComponentsInChildren<Transform>();
+		for(int i = 1; i < canvasObjcts.Length; i++)
+		{
+			canvasObjcts[i].gameObject.SetActive(false);
+			Debug.Log(canvasObjcts[i].name + " - " + i);
+		}
+
 		
 		
+	//	canvasObjcts[16].gameObject.SetActive(true);
+		shareButton.SetActive(true);
+
 	}
 
 	IEnumerator Rotation()
@@ -181,7 +180,6 @@ public class Model3d : MonoBehaviour {
 			yield return new WaitForSeconds (time/steps);
 		}
 		firework.gameObject.SetActive(true);
-		
 	}
 }
 

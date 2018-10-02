@@ -6,7 +6,20 @@ using UnityEngine.UI;
 public class CoinsController : MonoBehaviour {
 
 	public GameObject adverisingOffer;
-	public int coins = 4;
+	private int _coins = 4;
+
+	public int coins
+	{
+		get
+		{
+			return _coins;
+		}
+		set
+		{
+			_coins = value;
+			SavingCoins();
+		}
+	}
 	public Text coinsText;
 	public static CoinsController I;
 
@@ -33,7 +46,7 @@ public class CoinsController : MonoBehaviour {
 		//Here is watching advertising
 		Debug.Log("watching adverising...");
 		coins += quantityCoinsForAdvertising;
-		SavingCoins();
+		
 	}
 
 	void SavingCoins()

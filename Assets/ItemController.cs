@@ -117,6 +117,26 @@ public class ItemController : MonoBehaviour {
 		SaveHomeItemsToPref();
 	}
 
+	public void DeleteLevelFromHomeMenu()
+	{
+		/*foreach(int i in homeModels)
+		{
+			if(selectedItem == i)
+				homeModels.Remove(i);
+		}*/
+
+
+		for(int i = 0; i < homeModels.Count; i ++)
+		{
+			if(selectedItem == homeModels[i])
+				homeModels.Remove(homeModels[i]);
+			
+		}
+
+		
+		SaveHomeItemsToPref();
+	}
+
 	void SaveHomeItemsToPref()
 	{
 		int i = 0;

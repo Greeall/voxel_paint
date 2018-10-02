@@ -5,14 +5,12 @@ using UnityEngine;
 public class MakingVoxel : MonoBehaviour {
 
 	public GameObject voxelPrefab;
-	public GameObject parent;
-	public GameObject text;
 
 	public bool startCreating = false;
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("start making voxel");
+//		Debug.Log("start making voxel");
 	}
 	
 	// Update is called once per frame
@@ -55,7 +53,9 @@ public class MakingVoxel : MonoBehaviour {
 		int steps = 20;
 		float y = 0;
 		GameObject voxel = Instantiate(voxelPrefab, new Vector3(transform.position.x, transform.position.y - 0.001f, transform.position.z), voxelPrefab.transform.rotation) as GameObject;
-		
+		voxel.transform.SetParent(Settings.I.parentForVoxels.transform);
+
+
 		voxel.GetComponentInChildren<Renderer>().material.color = transform.GetComponent<ColorVoxel>().color;
 		for(int i = 0; i < steps; i ++)
 		{
