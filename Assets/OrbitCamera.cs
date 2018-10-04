@@ -44,7 +44,7 @@ public class OrbitCamera : MonoBehaviour {
             EventSystem.current.RaycastAll(m_PointerEventData, results);
 		}*/
 		
-		if(Input.touchCount == 1 && !Nib.painting)
+		if(Input.touchCount == 1 && !Nib.painting && !modelMainPosition.I.isReductionProcess)
 		{
 			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
     		PointerEventData m_PointerEventData;

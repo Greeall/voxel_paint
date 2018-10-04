@@ -197,6 +197,8 @@ public class MenuController : MonoBehaviour {
 		string path = imgPath + i;
  		Texture2D tex = null;
 		tex = Resources.Load<Texture2D>(path);
+		byte[] imgByte = File.ReadAllBytes(Application.persistentDataPath + "/" + imgPath + i + ".png");
+		tex.LoadImage(imgByte);
 		img = Sprite.Create(tex, new Rect(0,0, tex.width, tex.height), new Vector2(0.5f, 0.5f)); 
 		return img;
 	}

@@ -13,7 +13,9 @@ public class modelMainPosition : MonoBehaviour {
 	public Transform centralAxis;
 
 	bool isActive = true;
-	bool isReductionProcess = false;
+	public bool isReductionProcess = false;
+
+	
 
 	public static int layer = 0;
 

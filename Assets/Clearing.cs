@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using UnityEngine.UI;
+using System.IO;
+//using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class Clearing : MonoBehaviour {
 
 
 	public GameObject offerAboutClearing;
-
+	public Text testo;
 	public GameObject parentVoxels;
 	public GameObject parentPlarforms;
 	// Use this for initialization
@@ -45,7 +47,12 @@ public class Clearing : MonoBehaviour {
 		}
 		model._isBeginning = false;
 		model._isFinished = false;
-		AssetDatabase.DeleteAsset("Resources/homeImg"+ItemController.I.selectedItem);
+
+	//	testo.text = "before";
+		File.Delete(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".png");
+	//	File.Delete(Application.persistentDataPath + "/a");
+	//	testo.text = "after";
+		//AssetDatabase.DeleteAsset("Resources/homeImg"+ItemController.I.selectedItem); !1!!!! 
 	//	DeleteVoxelsAndPlatforms();
 	//	CloseOffer();
 		//delete from home

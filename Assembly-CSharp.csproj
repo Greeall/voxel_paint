@@ -74,6 +74,7 @@
      <Compile Include="Assets\Settings.cs" />
      <Compile Include="Assets\TargetPalette.cs" />
      <Compile Include="Assets\testTouch.cs" />
+     <Compile Include="Assets\TextSize.cs" />
      <Compile Include="Assets\VertScrollController.cs" />
      <Compile Include="Assets\VoxelColor.cs" />
      <Compile Include="Assets\VoxelDrawing.cs" />
