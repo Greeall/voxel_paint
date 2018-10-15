@@ -42,11 +42,7 @@ public class ItemController : MonoBehaviour {
 
 	void Update()
 	{
-		SaveAllModelsToPref();
-		if(Input.GetKeyDown("b"))
-		{
-			LookDrawnVoxel();
-		}
+		//SaveAllModelsToPref();
 	}
 
 	void LookDrawnVoxel()
@@ -63,7 +59,7 @@ public class ItemController : MonoBehaviour {
 	
 	void Start()
 	{
-		//SaveHomeItemsToPref();
+	//	SaveHomeItemsToPref();
 	}
 
 	void ReadLevelsFromPref()
@@ -84,7 +80,9 @@ public class ItemController : MonoBehaviour {
 			TextAsset level = Resources.Load<TextAsset>("model" + i);
 			string levelTxtString = level.text;
 			allModels.Add(JsonUtility.FromJson<Datas>(levelTxtString));
+			Debug.Log(modelsCount);
 		}
+		Debug.Log(allModels.Count  + " - itogo");
 		PlayerPrefs.SetInt("firstLaunch", 1);
 		SaveAllModelsToPref();
 	}

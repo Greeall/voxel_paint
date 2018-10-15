@@ -1,39 +1,26 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+//using Unity.Collections;
+using System.Collections;
+using System.IO;
 using System.Collections.Generic;
-using UnityEngine;
+
 
 public class ScreenshotMaker : MonoBehaviour {
 
 	Camera screenCamera;
-	
+
 	// Use this for initialization
 	void Start () {
+		
 		screenCamera = GetComponent<Camera>();
 		screenCamera.transform.position = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;		//
 		screenCamera.transform.eulerAngles = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;   //
 		screenCamera.transform.Translate(Vector3.back * 100f);
-		StartCoroutine(MakingScreen());
+		//StartCoroutine(MakingScreen());
 
 		
 	}
-
-	// void Update() {
-	// 	if (Random.Range(1, 60) == 5) {
-	// 		ScreenShot();
-	// 	}
-	// }
 	
-
-
-	IEnumerator MakingScreen()
-	{
-		for(;;)
-		{
-			ScreenShot();
-			yield return new WaitForSeconds(1f);
-		}
-	}
-
 	void ScreenShot()
 	{
 		int height = Screen.height ;
@@ -49,5 +36,14 @@ public class ScreenshotMaker : MonoBehaviour {
 		
 		Debug.Log(Application.persistentDataPath + "/homeImg"+ ItemController.I.selectedItem + ".png");
 		System.IO.File.WriteAllBytes(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".png", virtualPhoto.EncodeToJPG() );
+	}
+
+	IEnumerator MakingScreen()
+	{
+		for(;;)
+		{
+			ScreenShot();
+			yield return new WaitForSeconds(1f);
+		}
 	}
 }

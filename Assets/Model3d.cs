@@ -27,17 +27,17 @@ public class Model3d : MonoBehaviour {
 	//[SerializeField]
 	public List<Layer> model;  //to datas
 
-	public bool isBeginning = false; //to datas
+	//public bool isBeginning = false; //to datas
 
 	//public bool isReady = false;
+//
+//	public Vector3 mainPosition; //to datas
+	 //
+//	public Vector3 mainRotation; //to datas
+//
+//	public float mainZoom;  // to datas
 
-	public Vector3 mainPosition; //to datas
-	 
-	public Vector3 mainRotation; //to datas
-
-	public float mainZoom;  // to datas
-
-	public bool isVIP; //to datas
+	//public bool isVIP; //to datas
 
 	
 
@@ -48,9 +48,12 @@ public class Model3d : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		int changed = ItemController.I.selectedItem;
+		Debug.Log(changed + " - iiii");
+		Debug.Log(ItemController.I.allModels.Count + " - counttt");
 		
 		colors = new List<VoxelColor>(ItemController.I.allModels[changed]._colors);
 		model = new List<Layer>(ItemController.I.allModels[changed]._model);
+
 		
 		DisplayReadyVoxels();
 
@@ -90,12 +93,12 @@ public class Model3d : MonoBehaviour {
 		readyVoxels = _readyVxls;
 	}
 	
-	void SaveToTxt()
+	/*void SaveToTxt()
 	{
 		Datas data = new Datas(colors, model, false, false, mainPosition, mainRotation, mainZoom, isVIP);
 		string txt = JsonUtility.ToJson(data);
 		System.IO.File.WriteAllText("modello.txt", txt);
-	}
+	}*/
 
 	void Update () 
 	{

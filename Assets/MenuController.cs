@@ -51,9 +51,15 @@ public class MenuController : MonoBehaviour {
 		float itemPadding = itemWidth / 3f;
 		float y = - itemPadding;
 
-
 		//int halfOfItems = (ItemController.I.models.Count%2 == 0) ? ItemController.I.models.Count / 2 : ItemController.I.models.Count / 2 + 1;
-		float contentHeight = 5 * (itemWidth + itemPadding);
+		//if(ItemController.I.allModels.Count < 6)
+		//{
+		///	float contentHeight = 5 * (itemWidth + itemPadding);
+	//	}
+		//else
+		//{
+			float contentHeight = (ItemController.I.allModels.Count / 2 + 1) * (itemWidth + itemPadding);
+	//	}
 
 		//contentHeight = (contentHeight < Screen.height/ 5f) ? Screen.height / 5 : contentHeight;
 		

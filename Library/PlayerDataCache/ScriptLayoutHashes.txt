@@ -132,7 +132,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ScreenshotMaker
-272d65f34eb23426b2a977f21648a2ee Assembly-CSharp.dll:.Model3d
+df6a12122af9539632e5bfed68df9d2f Assembly-CSharp.dll:.Model3d
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 5f2ad81aa8994e8fbe25d1e57afe6773 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -146,7 +146,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 308e6ad9e332cb1dc71c9b7b8fa9f42c Assembly-CSharp.dll:.ItemController
 95a3517d11188331e55b5a8952419735 Assembly-CSharp.dll:.modelMainPosition
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.testTouch
-46ed8309e2785ff9e87b7568172c2689 Assembly-CSharp.dll:.TextSize
+6a3e68a29b56aa0d0b7851ebf9c4dcf5 Assembly-CSharp.dll:.TextSize
+b6593cdc9fe54996311afe2b678456dc Assembly-CSharp.dll:.OneLine
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Navigation
 eaef548a4b045e61eb59e51803a129f8 Assembly-CSharp.dll:.HomeMenuController
 8de1c20a61e1e697ba5623166410502e Assembly-CSharp.dll:.OrbitCamera

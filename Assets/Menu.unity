@@ -225,7 +225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -336.9387}
+  m_AnchoredPosition: {x: 0, y: -347.89014}
   m_SizeDelta: {x: 258.7, y: 347.89014}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &196500148
@@ -261,7 +261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00000047683716, y: 17.000013}
+  m_AnchoredPosition: {x: 0, y: 17.000015}
   m_SizeDelta: {x: -24, y: -124.00003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &196500150
@@ -1489,8 +1489,9 @@ GameObject:
   - component: {fileID: 1304308009}
   - component: {fileID: 1304308008}
   - component: {fileID: 1304308010}
+  - component: {fileID: 1304308011}
   m_Layer: 0
-  m_Name: Text
+  m_Name: crownQuantity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,18 +1503,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1304308006}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1866952558}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1.6, y: 0.5}
-  m_AnchorMax: {x: 1.6, y: 0.5}
+  m_AnchorMin: {x: 1, y: -0.1}
+  m_AnchorMax: {x: 1, y: -0.1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32.78, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 29, y: 32}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1304308008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,6 +1566,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coeff: 1
+--- !u!114 &1304308011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1304308006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa21160d1b0b19d46b14a3c5b288c66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 1866952558}
 --- !u!1 &1410871992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,8 +1814,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 231622230}
   m_HandleRect: {fileID: 231622229}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0
+  m_Value: 1
+  m_Size: 0.96869653
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2568,4 +2581,4 @@ MonoBehaviour:
   selectedItem: 0
   homeModels: 
   testo: {fileID: 1242242923}
-  modelsCount: 4
+  modelsCount: 6

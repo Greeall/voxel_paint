@@ -311,7 +311,7 @@ MonoBehaviour:
   selectedItem: 0
   homeModels: 
   testo: {fileID: 0}
-  modelsCount: 4
+  modelsCount: 6
 --- !u!1 &283291677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4483,6 +4483,7 @@ MonoBehaviour:
   mainCameraRot: {x: 34, y: 38.8, z: 0}
   mainCamera: {fileID: 1370872192}
   centralAxis: {fileID: 281363764}
+  isReductionProcess: 0
   black: {fileID: 21300000, guid: 0a9e27974bc8ea548a7def701f5f88cf, type: 3}
   gray: {fileID: 21300000, guid: bf7da7d9f74ccc043a8bb9a899edadf4, type: 3}
 --- !u!114 &1176193130
@@ -8364,6 +8365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offerAboutClearing: {fileID: 268759977}
+  testo: {fileID: 0}
   parentVoxels: {fileID: 390457842}
   parentPlarforms: {fileID: 283291677}
 --- !u!114 &1374306988
@@ -8645,11 +8647,6 @@ MonoBehaviour:
       voxelColor: 1
       isDrawing: 0
     isDrawing: 0
-  isBeginning: 0
-  mainPosition: {x: 0.38, y: 1.68, z: 1.72}
-  mainRotation: {x: 34, y: 38.8, z: 0}
-  mainZoom: 5
-  isVIP: 0
   platformPrefab: {fileID: 1270094470088686, guid: 9a780ea80f8fee7478bd2432844cc246,
     type: 2}
   firework: {fileID: 1158006755}
@@ -8901,6 +8898,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 63c101038a8c03043af5370640fc6663, type: 3}
   - {fileID: 2800000, guid: fd7387a7ee32e2249ac8a00ff0202ca1, type: 3}
   - {fileID: 2800000, guid: aaf30616b19095541bacd9273aea07a8, type: 3}
+  - {fileID: 2800000, guid: e4778bd1033e2d745bfad12db0b5fb19, type: 3}
+  - {fileID: 2800000, guid: 01fdc5b3de2da3747931b41f05dfe055, type: 3}
   parentForVoxels: {fileID: 390457842}
 --- !u!4 &1520781223
 Transform:
@@ -9136,6 +9135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offerAboutClearing: {fileID: 0}
+  testo: {fileID: 0}
   parentVoxels: {fileID: 0}
   parentPlarforms: {fileID: 0}
 --- !u!1 &1799414859
