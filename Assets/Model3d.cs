@@ -11,6 +11,8 @@ public class Model3d : MonoBehaviour {
 
 	public Camera mainCamera;
 
+	public GameObject screenCamera;
+
 	public GameObject canvas;
 
 	public GameObject floor;
@@ -22,22 +24,10 @@ public class Model3d : MonoBehaviour {
 
 	public GameObject voxelPrefab;
 
-	//[SerializeField]
 	public List<VoxelColor> colors;  //to datas
-	//[SerializeField]
+
 	public List<Layer> model;  //to datas
 
-	//public bool isBeginning = false; //to datas
-
-	//public bool isReady = false;
-//
-//	public Vector3 mainPosition; //to datas
-	 //
-//	public Vector3 mainRotation; //to datas
-//
-//	public float mainZoom;  // to datas
-
-	//public bool isVIP; //to datas
 
 	
 
@@ -48,8 +38,10 @@ public class Model3d : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		int changed = ItemController.I.selectedItem;
-		Debug.Log(changed + " - iiii");
-		Debug.Log(ItemController.I.allModels.Count + " - counttt");
+
+		screenCamera.transform.position = ItemController.I.allModels[changed]._mainPosition;
+		screenCamera.transform.eulerAngles = ItemController.I.allModels[changed]._mainRotation;
+		screenCamera.GetComponent<Camera>().orthographicSize = ItemController.I.allModels[changed]._mainZoom;
 		
 		colors = new List<VoxelColor>(ItemController.I.allModels[changed]._colors);
 		model = new List<Layer>(ItemController.I.allModels[changed]._model);
@@ -120,6 +112,7 @@ public class Model3d : MonoBehaviour {
 		{
 			ItemController.I.allModels[ItemController.I.selectedItem]._isFinished = true;
 			ItemController.I.allModels[ItemController.I.selectedItem]._isBeginning = false;
+			ItemController.I.SaveAllModelsToPref1();
 			Ending();
 		}
 	}

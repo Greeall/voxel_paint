@@ -37,12 +37,13 @@ public class ItemController : MonoBehaviour {
 			//Debug.Log("read from pref");
 		}
 
+		StartCoroutine(SaveAllModelsToPref());
 		ReadHomeLevelsFromStore();
 	}
 
 	void Update()
 	{
-		//SaveAllModelsToPref();
+	
 	}
 
 	void LookDrawnVoxel()
@@ -87,14 +88,31 @@ public class ItemController : MonoBehaviour {
 		SaveAllModelsToPref();
 	}
 
-	void SaveAllModelsToPref()
+	IEnumerator SaveAllModelsToPref()
 	{
-		for(int i = 0; i < modelsCount; i++)
+		for(;;)
 		{
-			string m = JsonUtility.ToJson(allModels[i]);
-			PlayerPrefs.SetString("model"+i, m);
+			for(int i = 0; i < modelsCount; i++)
+			{
+				string m = JsonUtility.ToJson(allModels[i]);
+				PlayerPrefs.SetString("model"+i, m);
+			}
+			yield return new WaitForSeconds(1f);
 		}
 	}
+
+	public void SaveAllModelsToPref1()
+	{
+		
+			for(int i = 0; i < modelsCount; i++)
+			{
+				string m = JsonUtility.ToJson(allModels[i]);
+				PlayerPrefs.SetString("model"+i, m);
+			}
+			
+	}
+
+
 
 	public void ReadHomeLevelsFromStore()
 	{

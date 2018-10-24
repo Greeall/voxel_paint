@@ -16,7 +16,7 @@ public class ScreenshotMaker : MonoBehaviour {
 		screenCamera.transform.position = ItemController.I.allModels[ItemController.I.selectedItem]._mainPosition;		//
 		screenCamera.transform.eulerAngles = ItemController.I.allModels[ItemController.I.selectedItem]._mainRotation;   //
 		screenCamera.transform.Translate(Vector3.back * 100f);
-		//StartCoroutine(MakingScreen());
+		StartCoroutine(MakingScreen());
 
 		
 	}

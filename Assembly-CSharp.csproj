@@ -83,9 +83,14 @@
      <None Include="Assets\Resources\model3.txt" />
      <None Include="Assets\Resources\model4.txt" />
      <None Include="Assets\Resources\model1.txt" />
+     <None Include="Assets\Resources\model9.txt" />
      <None Include="Assets\Resources\model0.txt" />
+     <None Include="Assets\Resources\model8.txt" />
+     <None Include="Assets\Resources\model6.txt" />
+     <None Include="Assets\Resources\model10.txt" />
      <None Include="Assets\Resources\model2.txt" />
      <None Include="Assets\Resources\model5.txt" />
+     <None Include="Assets\Resources\model7.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

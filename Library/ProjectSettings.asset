@@ -591,9 +591,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: c950d30e-e52d-43f4-b290-fce28523d723
+  cloudProjectId: f00dfa90-e1ca-4d68-a9d9-ae39ea1b39e6
   projectName: VoxelPaint
-  organizationId: ochkovna
+  organizationId: isarcasm
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

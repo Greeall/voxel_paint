@@ -311,7 +311,7 @@ MonoBehaviour:
   selectedItem: 0
   homeModels: 
   testo: {fileID: 0}
-  modelsCount: 6
+  modelsCount: 11
 --- !u!1 &283291677
 GameObject:
   m_ObjectHideFlags: 0
@@ -8568,6 +8568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformParent: {fileID: 283291678}
   mainCamera: {fileID: 1370872186}
+  screenCamera: {fileID: 1945002447}
   canvas: {fileID: 316159979}
   floor: {fileID: 2030317610}
   shareButton: {fileID: 1190932367}

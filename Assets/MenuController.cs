@@ -171,6 +171,7 @@ public class MenuController : MonoBehaviour {
 		ItemController.I.allModels[y]._isBeginning = true;
 		ItemController.I.AddLevelToHomeMenu();
 		PlayerPrefs.SetInt("SelectedItem", y);
+		ItemController.I.SaveAllModelsToPref1();
 		Application.LoadLevel("VoxelPaint");
 	}
 
@@ -211,6 +212,7 @@ public class MenuController : MonoBehaviour {
 
 	void SetMiniIcons(GameObject level, int i)
 	{
+		Debug.Log(ItemController.I.allModels[i]._isBeginning);
 		if(ItemController.I.allModels[i]._isFinished)
 		{
 			Image[] imgs = level.GetComponentsInChildren<Image>();
