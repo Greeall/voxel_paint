@@ -51,17 +51,12 @@ public class MenuController : MonoBehaviour {
 		float itemPadding = itemWidth / 3f;
 		float y = - itemPadding;
 
-		//int halfOfItems = (ItemController.I.models.Count%2 == 0) ? ItemController.I.models.Count / 2 : ItemController.I.models.Count / 2 + 1;
-		//if(ItemController.I.allModels.Count < 6)
-		//{
-		///	float contentHeight = 5 * (itemWidth + itemPadding);
-	//	}
-		//else
-		//{
-			float contentHeight = (ItemController.I.allModels.Count / 2 + 1) * (itemWidth + itemPadding);
-	//	}
+		float halfOfItems = (ItemController.I.allModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
+		
+		float contentHeight = (ItemController.I.allModels.Count / 2) * (itemWidth + itemPadding) + halfOfItems;
+	
 
-		//contentHeight = (contentHeight < Screen.height/ 5f) ? Screen.height / 5 : contentHeight;
+		
 		
 		content.GetComponent<RectTransform>().sizeDelta = new Vector2( content.GetComponent<RectTransform>().sizeDelta.x, contentHeight);
 	
@@ -108,10 +103,12 @@ public class MenuController : MonoBehaviour {
 		float y = - itemPadding;
 
 		
-		//int halfOfItems = (ItemController.I.models.Count%2 == 0) ? ItemController.I.models.Count / 2 : ItemController.I.models.Count / 2 + 1;
-		float contentHeight = 5 * (itemWidth + itemPadding);
+		float halfOfItems = (ItemController.I.homeModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
+		
+		float contentHeight = (ItemController.I.homeModels.Count / 2) * (itemWidth + itemPadding) + halfOfItems;
+		
 
-		//contentHeight = (contentHeight < Screen.height/ 5f) ? Screen.height / 5 : contentHeight;
+		
 		
 		content.GetComponent<RectTransform>().sizeDelta = new Vector2( content.GetComponent<RectTransform>().sizeDelta.x, contentHeight);
 	
@@ -119,7 +116,7 @@ public class MenuController : MonoBehaviour {
 		testo.text = PlayerPrefs.GetInt("homeLevelsCount", -1).ToString();
 		for(int i = 0; i < ItemController.I.homeModels.Count; i++)
 		{
-//			Debug.Log("Home number - " + ItemController.I.homeModels[i] + "; i - " + i);
+			Debug.Log("Home number - " + ItemController.I.homeModels[i] + "; i - " + i);
 			GameObject a = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
 
 			
@@ -204,7 +201,7 @@ public class MenuController : MonoBehaviour {
 		string path = imgPath + i;
  		Texture2D tex = null;
 		tex = Resources.Load<Texture2D>(path);
-		byte[] imgByte = File.ReadAllBytes(Application.persistentDataPath + "/" + imgPath + i + ".png");
+		byte[] imgByte = File.ReadAllBytes(Application.persistentDataPath + "/" + imgPath + i + ".jpg");
 		tex.LoadImage(imgByte);
 		img = Sprite.Create(tex, new Rect(0,0, tex.width, tex.height), new Vector2(0.5f, 0.5f)); 
 		return img;

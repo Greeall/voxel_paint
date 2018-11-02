@@ -46,6 +46,7 @@ public class CoinsController : MonoBehaviour {
 		//Here is watching advertising
 		Debug.Log("watching adverising...");
 		coins += quantityCoinsForAdvertising;
+		CloseAdvertisingOffer();
 		
 	}
 

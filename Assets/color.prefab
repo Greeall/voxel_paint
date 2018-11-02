@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1864674363056706}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1864674363056706
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 224747961463758282}
   - component: {fileID: 222247152932683416}
@@ -34,13 +34,14 @@ GameObject:
 --- !u!1 &1907260218134150
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 224530888274451870}
   - component: {fileID: 222362492963873022}
   - component: {fileID: 114320299675131218}
+  - component: {fileID: 114630543457948394}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -51,7 +52,7 @@ GameObject:
 --- !u!114 &114320299675131218
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907260218134150}
   m_Enabled: 1
@@ -84,7 +85,7 @@ MonoBehaviour:
 --- !u!114 &114339090439894584
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
   m_Enabled: 1
@@ -125,7 +126,7 @@ MonoBehaviour:
 --- !u!114 &114428374540792044
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
   m_Enabled: 1
@@ -152,7 +153,7 @@ MonoBehaviour:
 --- !u!114 &114438820236861660
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
   m_Enabled: 1
@@ -161,10 +162,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
+--- !u!114 &114630543457948394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907260218134150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423201ac384eb414db04c57acbc34857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coeff: 1
 --- !u!114 &114943887906343590
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
   m_Enabled: 0
@@ -195,19 +208,21 @@ MonoBehaviour:
 --- !u!222 &222247152932683416
 CanvasRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
+  m_CullTransparentMesh: 0
 --- !u!222 &222362492963873022
 CanvasRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907260218134150}
+  m_CullTransparentMesh: 0
 --- !u!224 &224530888274451870
 RectTransform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907260218134150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -225,7 +240,7 @@ RectTransform:
 --- !u!224 &224747961463758282
 RectTransform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864674363056706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}

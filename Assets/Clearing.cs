@@ -49,7 +49,7 @@ public class Clearing : MonoBehaviour {
 		model._isFinished = false;
 
 	//	testo.text = "before";
-		File.Delete(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".png");
+		File.Delete(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".jpg");
 	//	File.Delete(Application.persistentDataPath + "/a");
 	//	testo.text = "after";
 		//AssetDatabase.DeleteAsset("Resources/homeImg"+ItemController.I.selectedItem); !1!!!! 

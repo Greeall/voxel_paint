@@ -48,7 +48,6 @@ public class Nib : MonoBehaviour {
 		float offset = width + width/10;
 		int i = 1;
 		foreach(VoxelColor c in ItemController.I.allModels[ItemController.I.selectedItem]._colors)
-	//foreach(VoxelColor c in colors)
 		{
 			Vector3 pos = new Vector3(x,y,0f);
 			
@@ -60,7 +59,6 @@ public class Nib : MonoBehaviour {
 				colorNumber.GetComponent<Button>().GetComponentInChildren<Text>().color = Color.white;
 			Color cellColor = new Color(c.color.r, c.color.g, c.color.b, 1f);
 			colorNumber.GetComponent<Button>().GetComponent<Image>().color = cellColor;
-//			Debug.Log("color" + cellColor);
 			colorNumber.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
 			colorNumber.transform.SetParent(parent.transform);
 			colorNumber.transform.localPosition = pos;	
