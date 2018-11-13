@@ -25,7 +25,7 @@ public class ItemController : MonoBehaviour {
 		ItemController.I.homeModels = new List<int>();
 		ItemController.I.allModels = new List<Datas>();
 		selectedItem = PlayerPrefs.GetInt("SelectedItem", 0);
-		PlayerPrefs.SetInt("firstLaunch", 0);
+		//PlayerPrefs.SetInt("firstLaunch", 0);
 		if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
 		{
 			ReadLevelsFromStore();
@@ -37,7 +37,7 @@ public class ItemController : MonoBehaviour {
 			//Debug.Log("read from pref");
 		}
 
-		StartCoroutine(SaveAllModelsToPref());
+	//	StartCoroutine(SaveAllModelsToPref());
 		ReadHomeLevelsFromStore();
 	}
 
@@ -85,7 +85,7 @@ public class ItemController : MonoBehaviour {
 		}
 		Debug.Log(allModels.Count  + " - itogo");
 		PlayerPrefs.SetInt("firstLaunch", 1);
-		SaveAllModelsToPref();
+		SaveAllModelsToPref1();
 	}
 
 	IEnumerator SaveAllModelsToPref()
@@ -135,21 +135,11 @@ public class ItemController : MonoBehaviour {
 
 	public void DeleteLevelFromHomeMenu()
 	{
-		/*foreach(int i in homeModels)
-		{
-			if(selectedItem == i)
-				homeModels.Remove(i);
-		}*/
-
-
 		for(int i = 0; i < homeModels.Count; i ++)
 		{
 			if(selectedItem == homeModels[i])
 				homeModels.Remove(homeModels[i]);
-			
 		}
-
-		
 		SaveHomeItemsToPref();
 	}
 

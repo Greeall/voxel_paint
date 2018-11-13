@@ -34,7 +34,7 @@ public class OrbitCamera : MonoBehaviour {
 		float distance = Vector3.Distance(obj.transform.position, transform.position); //distance beetwen camera and human
 		Vector3 translate = Vector3.zero; 
 
-		/*if(Input.GetMouseButton(0))
+	/*	if(Input.GetMouseButton(0) || Input.GetMouseButton(1))
 		{
 			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
     		PointerEventData m_PointerEventData;
@@ -42,6 +42,14 @@ public class OrbitCamera : MonoBehaviour {
             m_PointerEventData.position = Input.mousePosition;
 			List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(m_PointerEventData, results);
+
+			float angle = transform.localEulerAngles.x;  //
+			angle = (angle > 180) ? angle - 360 : angle; //read rotation.x with sign minus
+			Vector3 _offset = Input.GetMouseButton(0) ? Vector3.one : -Vector3.one;
+			Debug.Log(angle);
+			if((angle > 12 && _offset.y > 0) ||
+			   (angle < 88 && _offset.y < 0)   )
+					transform.Rotate( - _offset.y * Time.deltaTime * speed * 4, 0, 0, Space.Self);
 		}*/
 		
 		if(Input.touchCount == 1 && !Nib.painting && !modelMainPosition.I.isReductionProcess)
@@ -64,9 +72,11 @@ public class OrbitCamera : MonoBehaviour {
 		
 				Vector3 rot = new Vector3(0f, _offset.x, 0);
 				transform.Rotate(rot * Time.deltaTime * speed, Space.World);
-				float angle = transform.localEulerAngles.x;  //
-				angle = (angle > 180) ? angle - 360 : angle; //read rotation.x with sign minus
-				transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
+				float angle = transform.localEulerAngles.x;  
+
+			if((angle > 12 && _offset.y > 0) ||
+			   (angle < 88 && _offset.y < 0)   )
+					transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
 			}
 		}
 

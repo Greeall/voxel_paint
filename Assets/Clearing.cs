@@ -48,16 +48,20 @@ public class Clearing : MonoBehaviour {
 		model._isBeginning = false;
 		model._isFinished = false;
 
+		ItemController.I.allModels[ItemController.I.selectedItem] = model;
+		ItemController.I.SaveAllModelsToPref1();
+		ItemController.I.DeleteLevelFromHomeMenu();
+		SceneManager.LoadScene("Menu");
+
 	//	testo.text = "before";
-		File.Delete(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".jpg");
+	//	File.Delete(Application.persistentDataPath + "/homeImg" + ItemController.I.selectedItem + ".jpg");
 	//	File.Delete(Application.persistentDataPath + "/a");
 	//	testo.text = "after";
 		//AssetDatabase.DeleteAsset("Resources/homeImg"+ItemController.I.selectedItem); !1!!!! 
 	//	DeleteVoxelsAndPlatforms();
 	//	CloseOffer();
 		//delete from home
-		ItemController.I.DeleteLevelFromHomeMenu();
-		SceneManager.LoadScene("Menu");
+		
 	}
 
 	void DeleteVoxelsAndPlatforms()

@@ -6,6 +6,9 @@ using System.IO;
 
 public class MenuController : MonoBehaviour {
 
+	public Sprite img;
+
+
 	public GameObject itemPrefab;
 	public GameObject content;
 
@@ -103,11 +106,10 @@ public class MenuController : MonoBehaviour {
 		float y = - itemPadding;
 
 		
-		float halfOfItems = (ItemController.I.homeModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
+		//float halfOfItems = (ItemController.I.homeModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
 		
-		float contentHeight = (ItemController.I.homeModels.Count / 2) * (itemWidth + itemPadding) + halfOfItems;
-		
-
+		float contentHeight = (ItemController.I.homeModels.Count / 2 + 1) * (itemWidth + itemPadding);		
+		if(ItemController.I.homeModels.Count < 6) contentHeight = 3 * (itemWidth + itemPadding);
 		
 		
 		content.GetComponent<RectTransform>().sizeDelta = new Vector2( content.GetComponent<RectTransform>().sizeDelta.x, contentHeight);
@@ -131,7 +133,7 @@ public class MenuController : MonoBehaviour {
 			a.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
 			a.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 			
-			Sprite img = GetSpriteFromResources(ItemController.I.homeModels[i], "homeImg");
+			//Sprite img = GetSpriteFromResources(ItemController.I.homeModels[i], "homeImg");
 			a.GetComponent<Image>().sprite = img;
 
 			x += itemWidth + itemPadding;
