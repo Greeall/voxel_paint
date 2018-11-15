@@ -24,8 +24,8 @@ public class ItemController : MonoBehaviour {
 		I = this;
 		ItemController.I.homeModels = new List<int>();
 		ItemController.I.allModels = new List<Datas>();
-		selectedItem = PlayerPrefs.GetInt("SelectedItem", 0);
-		//PlayerPrefs.SetInt("firstLaunch", 0);
+		//selectedItem = PlayerPrefs.GetInt("SelectedItem", 0);
+		PlayerPrefs.SetInt("firstLaunch", 0);
 		if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
 		{
 			ReadLevelsFromStore();

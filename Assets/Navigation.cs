@@ -10,15 +10,16 @@ public class Navigation : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if(Application.platform == RuntimePlatform.Android)
 		{
 			if(Input.GetKeyDown(KeyCode.Escape))
 			{
+				ScreenshotMaker.
 				Application.LoadLevel("Menu");
 			}
 		}
-	}
+	}*/
 
 	public void BackToMenu()
 	{

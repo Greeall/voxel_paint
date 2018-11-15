@@ -74,8 +74,8 @@ public class OrbitCamera : MonoBehaviour {
 				transform.Rotate(rot * Time.deltaTime * speed, Space.World);
 				float angle = transform.localEulerAngles.x;  
 
-			if((angle > 12 && _offset.y > 0) ||
-			   (angle < 88 && _offset.y < 0)   )
+			if((angle + _offset.y * Time.deltaTime * speed > 12 && _offset.y > 0) ||
+			   (angle + _offset.y * Time.deltaTime * speed < 88 && _offset.y < 0)   )
 					transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
 			}
 		}
