@@ -8,21 +8,5 @@ public class Navigation : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	/*void Update () {
-		if(Application.platform == RuntimePlatform.Android)
-		{
-			if(Input.GetKeyDown(KeyCode.Escape))
-			{
-				ScreenshotMaker.
-				Application.LoadLevel("Menu");
-			}
-		}
-	}*/
 
-	public void BackToMenu()
-	{
-		Application.LoadLevel("Menu");
-	}
 }

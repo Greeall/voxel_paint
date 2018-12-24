@@ -8,14 +8,29 @@ public class MakingVoxel : MonoBehaviour {
 
 	public bool startCreating = false;
 
-	// Use this for initialization
-	void Start () {
-//		Debug.Log("start making voxel");
-	}
+	public float speed = 3f;
+
+	GameObject voxel;
+	public bool isCreating = false;
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
+		if(isCreating)
+		{
+			if(voxel.transform.localScale.y < 1)
+			{
+				voxel.transform.localScale = 
+					new Vector3(voxel.transform.localScale.x, voxel.transform.localScale.y + Time.deltaTime * speed, voxel.transform.localScale.z);
+			}
+			else
+			{
+				voxel.transform.localScale = 
+					new Vector3(voxel.transform.localScale.x, 1f, voxel.transform.localScale.z);
+				isCreating = false;
+				Destroy(gameObject);
+			}
+		}		
 	}
 
 		
@@ -44,12 +59,19 @@ public class MakingVoxel : MonoBehaviour {
 	}
 	*/
 
-	
+	public void SmoothCreateVoxel()
+	{
+		voxel = Instantiate(voxelPrefab, new Vector3(transform.position.x, transform.position.y - 0.001f, transform.position.z), voxelPrefab.transform.rotation) as GameObject;
+		voxel.transform.SetParent(Settings.I.parentForVoxels.transform);
+		voxel.GetComponentInChildren<Renderer>().material.color = transform.GetComponent<ColorVoxel>().color;
+		isCreating = true;
+	}
 
-	public IEnumerator SmoothCreateVoxel()
+	/*public IEnumerator SmoothCreateVoxel()
 	{
 		
-		float time = 0.3f;
+		float time = 0.005f / Time.deltaTime;
+		//Debug.Log(time);
 		int steps = 20;
 		float y = 0;
 		GameObject voxel = Instantiate(voxelPrefab, new Vector3(transform.position.x, transform.position.y - 0.001f, transform.position.z), voxelPrefab.transform.rotation) as GameObject;
@@ -65,5 +87,5 @@ public class MakingVoxel : MonoBehaviour {
 			yield return new WaitForSeconds(time/steps);
 		}
 		Destroy(gameObject);
-	}
+	}*/
 }

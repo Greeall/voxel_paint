@@ -33,6 +33,11 @@ public class Datas {
 		_isVip = vip;
 	}
 
+	public Datas()
+	{
+		
+	}
+
     public bool isExist()
 	{
 		if(this._colors.Count >= 1 && this._model.Count >= 1)

@@ -27,7 +27,8 @@ public class VoxelDrawing : MonoBehaviour {
 					{
 						hit.transform.GetComponent<MakingVoxel>().startCreating = true;
 						Model3d.readyVoxels++;
-						StartCoroutine(making_voxel.SmoothCreateVoxel());
+						making_voxel.SmoothCreateVoxel();
+						//StartCoroutine(making_voxel.SmoothCreateVoxel());
 						SetReadyVoxel(hit.transform.position);
 					}
             	}
@@ -48,9 +49,11 @@ public class VoxelDrawing : MonoBehaviour {
                 	if(Nib.nibColor == hit.transform.GetComponent<ColorVoxel>().color &&  !hit.transform.GetComponent<MakingVoxel>().startCreating)
 					{
 						Nib.painting = true;
+					//	Debug.Log(Nib.painting);
 						hit.transform.GetComponent<MakingVoxel>().startCreating = true;
 						Model3d.readyVoxels++;
-						StartCoroutine(making_voxel.SmoothCreateVoxel());
+						making_voxel.SmoothCreateVoxel();
+					//	StartCoroutine(making_voxel.SmoothCreateVoxel());
 						SetReadyVoxel(hit.transform.position);
 					}
             	}

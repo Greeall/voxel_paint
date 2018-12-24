@@ -23,15 +23,11 @@ public class MenuController : MonoBehaviour {
 	public Text testo;
 
 	public Image menu;
-	// Use this for initialization
+
+	public GameObject offerAboutClosing;
+
 	void Start () {
-		
-//		Debug.Log(menu.GetComponent<RectTransform>().offsetMin);
-
-		menu.GetComponent<RectTransform>().offsetMin = new Vector2(Screen.width / 20f, Screen.height / 5f);
-		menu.GetComponent<RectTransform>().offsetMax = new Vector2( - Screen.width / 20f, - Screen.height / 10f );
-		DisplayItems();
-
+		Invoke("DisplayItems", 0.01f);
 	}
 
 	void Update()
@@ -39,53 +35,69 @@ public class MenuController : MonoBehaviour {
 		if(Application.platform == RuntimePlatform.Android)
 		{
 			if(Input.GetKeyDown(KeyCode.Escape))
-			{
-				Application.Quit();
-			}
+				offerAboutClosing.SetActive(true);
 		}
 	}
 
+	public void CloseApp()
+	{
+		Application.Quit();
+	}
+
+	public void CloseOfferAboutClosing()
+	{
+		offerAboutClosing.SetActive(false);
+	}
 
 
 	void DisplayItems()
 	{
-		float x = 0;
-		float itemWidth = (Screen.width - (Screen.width/20f * 2))/3f;
+		float screenWidth = content.GetComponent<RectTransform>().rect.width;
+		if(content.GetComponent<RectTransform>().rect.width > 0)
+			PlayerPrefs.SetFloat("contentWidth", content.GetComponent<RectTransform>().rect.width);
+		else
+			screenWidth = PlayerPrefs.GetFloat("contentWidth", content.GetComponent<RectTransform>().rect.width);
+		
+		float itemWidth = screenWidth / 3f;
+		float realItemWidth = Screen.width * 0.9f / 3f;
 		float itemPadding = itemWidth / 3f;
-		float y = - itemPadding;
+		float y = -itemPadding;
+		float x = itemPadding;
 
+		
 		float halfOfItems = (ItemController.I.allModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
-		
 		float contentHeight = (ItemController.I.allModels.Count / 2) * (itemWidth + itemPadding) + halfOfItems;
+		
 	
+		if(ItemController.I.allModels.Count < 6) contentHeight = 3 * (itemWidth + itemPadding);
+		content.GetComponent<RectTransform>().sizeDelta = new Vector2( 0f, contentHeight);
+	
+		content.GetComponent<RectTransform>().localPosition = new Vector2(0f, -(contentHeight + itemPadding));
 
 		
-		
-		content.GetComponent<RectTransform>().sizeDelta = new Vector2( content.GetComponent<RectTransform>().sizeDelta.x, contentHeight);
-	
-		content.GetComponent<RectTransform>().localPosition = new Vector2(itemPadding, -(contentHeight + itemPadding));
-		testo.text = PlayerPrefs.GetInt("levelsCount", -3).ToString();
 		for(int i = 0; i < ItemController.I.allModels.Count; i++)
 		{
 			int number = i;
-			GameObject level = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
+			GameObject level = Instantiate(itemPrefab, new Vector3(0,0,0), transform.rotation) as GameObject;
 			SetMiniIcons(level, number);
 			
 
-			level.transform.SetParent(content.transform);
-			level.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
-		
+			level.transform.SetParent(content.transform);		
 			level.GetComponent<Button>().onClick.AddListener(() => TryOpenLevel(number));
-			level.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
-			
 			level.GetComponentInChildren<Text>().text = CountUpVoxels(i).ToString();
-
-			x += itemWidth + itemPadding;
-			if(i%2 == 1)
+			level.GetComponent<RectTransform>().sizeDelta = new Vector2(realItemWidth, realItemWidth);
+			
+			if(i%2 == 0)
 			{
-				y -= Screen.width/3 + Screen.width/3/5f;
-				x = 0;
+				x = itemPadding;
+				if(i != 0) y -= itemPadding + itemWidth;
 			}
+			else
+			{
+				x = itemPadding*2 + itemWidth;
+			}
+			level.GetComponent<RectTransform>().localPosition = new Vector2(x, y);			
+			
 		}
 	}
 
@@ -100,33 +112,28 @@ public class MenuController : MonoBehaviour {
 
 	void DisplayHomeItems()
 	{
-		float x = 0;
-		float itemWidth = (Screen.width - (Screen.width/20f * 2))/3f;
+		float realItemWidth = Screen.width * 0.9f / 3f;
+		float screenWidth = content.GetComponent<RectTransform>().rect.width;
+		float itemWidth = screenWidth / 3f;
 		float itemPadding = itemWidth / 3f;
-		float y = - itemPadding;
+		float y = -itemPadding;
+		float x = itemPadding;
 
 		
 		float halfOfItems = (ItemController.I.homeModels.Count%2 == 0) ? itemWidth/2.7f : itemWidth/2.7f + itemWidth + itemPadding;
-		
 		float contentHeight = (ItemController.I.homeModels.Count / 2) * (itemWidth + itemPadding) + halfOfItems;
 		
 	
-		if(ItemController.I.homeModels.Count < 6) contentHeight = 3 * (itemWidth + itemPadding);
-		
-		
-		content.GetComponent<RectTransform>().sizeDelta = new Vector2( content.GetComponent<RectTransform>().sizeDelta.x, contentHeight);
+		if(ItemController.I.allModels.Count < 6) contentHeight = 3 * (itemWidth + itemPadding);
+		content.GetComponent<RectTransform>().sizeDelta = new Vector2( 0f, contentHeight);
 	
-		content.GetComponent<RectTransform>().localPosition = new Vector2(itemPadding, -(contentHeight + itemPadding));
-		testo.text = PlayerPrefs.GetInt("homeLevelsCount", -1).ToString();
+		content.GetComponent<RectTransform>().localPosition = new Vector2(0f, -(contentHeight + itemPadding));
+		
 		for(int i = 0; i < ItemController.I.homeModels.Count; i++)
 		{
-			Debug.Log("Home number - " + ItemController.I.homeModels[i] + "; i - " + i);
 			GameObject a = Instantiate(itemPrefab, new Vector3(x,y,0), transform.rotation) as GameObject;
-
-			
-
 			a.transform.SetParent(content.transform);
-			a.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
+			//a.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth,itemWidth);
 			int number = ItemController.I.homeModels[i];
 
 			Text[] imgs = a.GetComponentsInChildren<Text>();
@@ -134,22 +141,26 @@ public class MenuController : MonoBehaviour {
 
 			a.GetComponent<Button>().onClick.AddListener(() => OpenLevel(number));
 			a.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+			a.GetComponent<RectTransform>().sizeDelta = new Vector2(realItemWidth, realItemWidth);
 			
 			//Sprite img1 = GetSpriteFromResources(ItemController.I.homeModels[i], "homeImg");
 			a.GetComponent<Image>().sprite = img;
 
-			x += itemWidth + itemPadding;
-			if(i%2 == 1)
+			if(i%2 == 0)
 			{
-				y -= Screen.width/3 + Screen.width/3/5f;
-				x = 0;
+				x = itemPadding;
+				if(i != 0) y -= itemPadding + itemWidth;
 			}
+			else
+			{
+				x = itemPadding*2 + itemWidth;
+			}
+			a.GetComponent<RectTransform>().localPosition = new Vector2(x, y);			
 		}
 	}
 	public void TryOpenLevel(int y)
 	{
 		Datas item = ItemController.I.allModels[y];
-//		Debug.Log("vip - " + item._isVip + " beg - " + item._isBeginning + " end - " + item._isFinished);
 		if(item._isVip && !item._isBeginning && !item._isFinished)
 		{
 			if(CoinsController.I.coins - 2 >= 0)
@@ -171,7 +182,7 @@ public class MenuController : MonoBehaviour {
 		ItemController.I.selectedItem = y;
 		ItemController.I.allModels[y]._isBeginning = true;
 		ItemController.I.AddLevelToHomeMenu();
-		PlayerPrefs.SetInt("SelectedItem", y);
+		ES2.Save(y, "SelectedItem");
 		ItemController.I.SaveAllModelsToPref1();
 		Application.LoadLevel("VoxelPaint");
 	}
@@ -213,7 +224,6 @@ public class MenuController : MonoBehaviour {
 
 	void SetMiniIcons(GameObject level, int i)
 	{
-		Debug.Log(ItemController.I.allModels[i]._isBeginning);
 		if(ItemController.I.allModels[i]._isFinished)
 		{
 			Image[] imgs = level.GetComponentsInChildren<Image>();

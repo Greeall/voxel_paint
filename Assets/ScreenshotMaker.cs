@@ -30,7 +30,8 @@ public class ScreenshotMaker : MonoBehaviour {
 		{
 			if(Input.GetKeyDown(KeyCode.Escape))
 			{
-				ScreenShot();
+				//ScreenShot();
+				ItemController.I.SaveAllModelsToPref1();
 				Application.LoadLevel("Menu");
 			}
 		}

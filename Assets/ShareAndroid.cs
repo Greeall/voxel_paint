@@ -24,7 +24,7 @@ private IEnumerator TakeSSAndShare()
 	// To avoid memory leaks
 	Destroy( ss );
 
-	new NativeShare().AddFile( filePath ).SetSubject( "Subject goes here" ).SetText( "Hello world!" ).Share();
+	new NativeShare().AddFile( filePath ).SetSubject( "Subject goes here" ).SetText( "Try to do the same model! It's very cool!" ).Share();
 
 	// Share on WhatsApp only, if installed (Android only)
 	//if( NativeShare.TargetExists( "com.whatsapp" ) )

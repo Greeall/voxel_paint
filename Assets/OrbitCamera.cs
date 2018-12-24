@@ -11,11 +11,11 @@ public class OrbitCamera : MonoBehaviour {
 	[SerializeField] private Transform generator;
 	float offset;
 	float restrictedOffset;
-	
 	public float speed = 4f;
-	
+	float yMinLimit = 12;
+	float yMaxLimit = 88;
 	Camera _camera;
-
+	float x,y;
 	
 	Touch touch0, touch1;
 	void Awake () {
@@ -23,6 +23,12 @@ public class OrbitCamera : MonoBehaviour {
 		restrictedOffset = offset;									// min distance = distance
 		transform.LookAt(obj); 										//camera look at human
 		_camera = GetComponent<Camera>();
+	}
+
+	void Start() {
+		Vector3 angles = transform.eulerAngles;
+        x = angles.y;
+        y = angles.x;
 	}
 
 	void Update()
@@ -33,9 +39,11 @@ public class OrbitCamera : MonoBehaviour {
 		
 		float distance = Vector3.Distance(obj.transform.position, transform.position); //distance beetwen camera and human
 		Vector3 translate = Vector3.zero; 
-
-	/*	if(Input.GetMouseButton(0) || Input.GetMouseButton(1))
+		Quaternion rotation = transform.rotation;
+		/*if(Input.GetMouseButton(0)  && !Nib.painting)
 		{
+			Debug.Log(Nib.painting);
+			
 			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
     		PointerEventData m_PointerEventData;
 			m_PointerEventData = new PointerEventData(EventSystem.current);
@@ -46,14 +54,23 @@ public class OrbitCamera : MonoBehaviour {
 			float angle = transform.localEulerAngles.x;  //
 			angle = (angle > 180) ? angle - 360 : angle; //read rotation.x with sign minus
 			Vector3 _offset = Input.GetMouseButton(0) ? Vector3.one : -Vector3.one;
-			Debug.Log(angle);
-			if((angle > 12 && _offset.y > 0) ||
-			   (angle < 88 && _offset.y < 0)   )
-					transform.Rotate( - _offset.y * Time.deltaTime * speed * 4, 0, 0, Space.Self);
+			
+			float offset_y = - _offset.y;
+			// if(((angle - offset_y) > 12 && offset_y < 0) ||
+			//    ((angle + offset_y) < 88 && offset_y > 0)   )
+			// 		transform.Rotate( offset_y * Time.deltaTime * speed * 20, 0, 0, Space.Self);
+			x += Input.GetAxis("Mouse X") * speed * distance * 0.1f;
+            y -= Input.GetAxis("Mouse Y") * speed * 0.1f;
+ 
+            y = ClampAngle(y, yMinLimit, yMaxLimit);
+ 
+            rotation = Quaternion.Euler(y, x, 0);
 		}*/
+
 		
 		if(Input.touchCount == 1 && !Nib.painting && !modelMainPosition.I.isReductionProcess)
 		{
+			Debug.Log(Nib.painting);
 			GraphicRaycaster m_Raycaster = GetComponent<GraphicRaycaster>();
     		PointerEventData m_PointerEventData;
 			m_PointerEventData = new PointerEventData(EventSystem.current);
@@ -69,14 +86,13 @@ public class OrbitCamera : MonoBehaviour {
 					_offset = _touch.deltaPosition;
 				else
 					_offset = Vector2.zero;
-		
-				Vector3 rot = new Vector3(0f, _offset.x, 0);
-				transform.Rotate(rot * Time.deltaTime * speed, Space.World);
-				float angle = transform.localEulerAngles.x;  
 
-			if((angle + _offset.y * Time.deltaTime * speed > 12 && _offset.y > 0) ||
-			   (angle + _offset.y * Time.deltaTime * speed < 88 && _offset.y < 0)   )
-					transform.Rotate( - _offset.y * Time.deltaTime * speed, 0, 0, Space.Self);
+				x += _offset.x * speed/2f * distance * 0.01f;
+				y -= _offset.y * speed * 0.01f;
+	
+				y = ClampAngle(y, yMinLimit, yMaxLimit);
+	
+				rotation = Quaternion.Euler(y, x, 0);
 			}
 		}
 
@@ -91,8 +107,9 @@ public class OrbitCamera : MonoBehaviour {
 			float outDiff;
 			if(isZoom(out outDiff))
 			{
-				_camera.orthographicSize += outDiff * Time.deltaTime;
-				_camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize, 1, 10);
+				float spd = (_camera.orthographicSize / 10f > 1) ? 1 : _camera.orthographicSize / 10f;
+				_camera.orthographicSize += outDiff * Time.deltaTime * spd;
+				_camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize, 1, 50);
 			}
 			else
 			{
@@ -101,7 +118,8 @@ public class OrbitCamera : MonoBehaviour {
 				obj.transform.Translate( - transform.TransformDirection(direction * Time.deltaTime), Space.World);
 			}	
 		}
-
+		
+		transform.rotation = rotation;
 		Vector3 pos = obj.position - transform.forward * Mathf.Min(offset, restrictedOffset); //change min from 
 		transform.position = pos + translate;
 	}
@@ -133,4 +151,12 @@ public class OrbitCamera : MonoBehaviour {
 		}
 	}
 
+	public static float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360F)
+            angle += 360F;
+        if (angle > 360F)
+            angle -= 360F;
+        return Mathf.Clamp(angle, min, max);
+    }
 }

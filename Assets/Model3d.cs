@@ -94,6 +94,10 @@ public class Model3d : MonoBehaviour {
 
 	void Update () 
 	{
+		if(Input.GetKeyDown("e"))
+		{
+			Application.LoadLevel("Menu");
+		}
 		//if(Input.GetKeyDown("e"))
 		//	Ending();
 
@@ -145,13 +149,12 @@ public class Model3d : MonoBehaviour {
 		float zoom = ItemController.I.allModels[ItemController.I.selectedItem]._mainZoom;
 		floor.SetActive(false);
 		//canvas.SetActive(false);
-		firework.gameObject.transform.localScale = new Vector3(zoom * 2/ 10f, zoom * 2/ 10f, zoom * 2/ 10f);
+		//firework.gameObject.transform.localScale = new Vector3(zoom * 2/ 10f, zoom * 2/ 10f, zoom * 2/ 10f);
 		StartCoroutine(Rotation());
 		Transform[] canvasObjcts = canvas.GetComponentsInChildren<Transform>();
 		for(int i = 1; i < canvasObjcts.Length; i++)
 		{
 			canvasObjcts[i].gameObject.SetActive(false);
-			Debug.Log(canvasObjcts[i].name + " - " + i);
 		}
 
 		

@@ -11,10 +11,6 @@ public class ItemController : MonoBehaviour {
 	[HideInInspector] public List<Datas> allModels;
 	[HideInInspector] public List<int> homeModels;
 
-
-
-	public Text testo;
-
 	public int modelsCount;
 
 	public static ItemController I;
@@ -24,51 +20,36 @@ public class ItemController : MonoBehaviour {
 		I = this;
 		ItemController.I.homeModels = new List<int>();
 		ItemController.I.allModels = new List<Datas>();
-		//selectedItem = PlayerPrefs.GetInt("SelectedItem", 0);
-		PlayerPrefs.SetInt("firstLaunch", 0);
-		if(PlayerPrefs.GetInt("firstLaunch", 0) == 0)
+
+		if(ES2.Exists("SelectedItem"))
+			selectedItem = ES2.Load<int>("SelectedItem");
+		else
+			selectedItem = 0;
+
+		if(ES2.Exists("firsLaunch"))
 		{
-			ReadLevelsFromStore();
-			//Debug.Log("read from store");
+			ReadLevelsFromPref();		
 		}
 		else
 		{
-			ReadLevelsFromPref();
-			//Debug.Log("read from pref");
+			ReadLevelsFromStore();
 		}
 
-	//	StartCoroutine(SaveAllModelsToPref());
 		ReadHomeLevelsFromStore();
 	}
-
-	void Update()
-	{
-	
-	}
-
-	void LookDrawnVoxel()
-	{
-		foreach(Layer l in allModels[0]._model)
-		{
-			foreach(VoxelPlatform p in l.layer)
-			{
-				Debug.Log(p.isDrawing);
-			}
-		}
-	}
-
 	
 	void Start()
 	{
-	//	SaveHomeItemsToPref();
+		//SaveHomeItemsToPref();
 	}
+
 
 	void ReadLevelsFromPref()
 	{
 		for(int i = 0; i < modelsCount; i++)
 		{
-			string m = PlayerPrefs.GetString("model"+i, "");
-			allModels.Add(JsonUtility.FromJson<Datas>(m));
+			if(ES2.Exists("model" + i))
+				allModels.Add(ES2.Load<Datas>("model" + i));
 		}
 	}
 
@@ -81,48 +62,40 @@ public class ItemController : MonoBehaviour {
 			TextAsset level = Resources.Load<TextAsset>("model" + i);
 			string levelTxtString = level.text;
 			allModels.Add(JsonUtility.FromJson<Datas>(levelTxtString));
-			Debug.Log(modelsCount);
 		}
-		Debug.Log(allModels.Count  + " - itogo");
-		PlayerPrefs.SetInt("firstLaunch", 1);
+		
+		ES2.Save(1, "firsLaunch");
 		SaveAllModelsToPref1();
 	}
 
-	IEnumerator SaveAllModelsToPref()
-	{
-		for(;;)
-		{
-			for(int i = 0; i < modelsCount; i++)
-			{
-				string m = JsonUtility.ToJson(allModels[i]);
-				PlayerPrefs.SetString("model"+i, m);
-			}
-			yield return new WaitForSeconds(1f);
-		}
-	}
+	
 
 	public void SaveAllModelsToPref1()
 	{
-		
-			for(int i = 0; i < modelsCount; i++)
-			{
-				string m = JsonUtility.ToJson(allModels[i]);
-				PlayerPrefs.SetString("model"+i, m);
-			}
-			
+		for(int i = 0; i < modelsCount; i++)
+			ES2.Save(allModels[i], "model" + i);		
 	}
+
 
 
 
 	public void ReadHomeLevelsFromStore()
 	{
-		int count = PlayerPrefs.GetInt("homeLevelsCount", 0);
+		int count;
+		if(ES2.Exists("homeLevelsCount"))
+			count = ES2.Load<int>("homeLevelsCount");
+		else
+			count = 0;
+
+	
 		for(int i = 0; i < count; i ++)
 		{
-			homeModels.Add(PlayerPrefs.GetInt("homeLevel" + i, 0));
+			if(ES2.Exists("homeLevel" + i))
+				homeModels.Add(ES2.Load<int>("homeLevel" + i));
+			else
+				homeModels.Add(0);
 		}
 	}
-
 
 	public void AddLevelToHomeMenu()
 	{
@@ -143,13 +116,16 @@ public class ItemController : MonoBehaviour {
 		SaveHomeItemsToPref();
 	}
 
+
+
 	void SaveHomeItemsToPref()
 	{
 		int i = 0;
-		PlayerPrefs.SetInt("homeLevelsCount", homeModels.Count);
+		ES2.Save(homeModels.Count, "homeLevelsCount");
+	
 		foreach(int item in homeModels)
 		{
-			PlayerPrefs.SetInt("homeLevel" + i, item);
+			ES2.Save(item, "homeLevel" + i);
 			i++;
 		}
 	}
